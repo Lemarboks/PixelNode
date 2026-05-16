@@ -7,6 +7,14 @@ const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.main-
 const sections = Array.from(document.querySelectorAll<HTMLElement>('main section[id]'));
 const contactForm = document.querySelector<HTMLFormElement>('[data-contact-form]');
 const formStatus = document.querySelector<HTMLElement>('[data-form-status]');
+const cursorGlow = document.querySelector<HTMLElement>('[data-cursor-glow]');
+const revealItems = Array.from(
+  document.querySelectorAll<HTMLElement>(
+    '.hero-copy > *, .hero-visual, .service-card, .section-heading, .work-card, .about-panel, .stats-grid > div, .contact-copy, .contact-form'
+  )
+);
+const tiltCards = Array.from(document.querySelectorAll<HTMLElement>('.tilt-card'));
+const canAnimate = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const setHeaderState = () => {
   header?.classList.toggle('scrolled', window.scrollY > 12);
@@ -42,6 +50,49 @@ window.addEventListener('scroll', () => {
   setHeaderState();
   updateActiveLink();
 });
+
+if (canAnimate) {
+  revealItems.forEach((item) => item.classList.add('reveal'));
+
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.18, rootMargin: '0px 0px -8% 0px' }
+  );
+
+  revealItems.forEach((item) => revealObserver.observe(item));
+
+  window.addEventListener('pointermove', (event) => {
+    cursorGlow?.style.setProperty('--cursor-x', `${event.clientX}px`);
+    cursorGlow?.style.setProperty('--cursor-y', `${event.clientY}px`);
+  });
+
+  tiltCards.forEach((card) => {
+    card.addEventListener('pointermove', (event) => {
+      const rect = card.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+      card.style.setProperty('--tilt-x', `${(-y * 7).toFixed(2)}deg`);
+      card.style.setProperty('--tilt-y', `${(x * 9).toFixed(2)}deg`);
+      card.style.setProperty('--glow-x', `${event.clientX - rect.left}px`);
+      card.style.setProperty('--glow-y', `${event.clientY - rect.top}px`);
+    });
+
+    card.addEventListener('pointerleave', () => {
+      card.style.setProperty('--tilt-x', '0deg');
+      card.style.setProperty('--tilt-y', '0deg');
+    });
+  });
+} else {
+  revealItems.forEach((item) => item.classList.add('visible'));
+}
 
 contactForm?.addEventListener('submit', (event) => {
   event.preventDefault();
