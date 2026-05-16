@@ -791,11 +791,55 @@ textarea {
 
 .section-heading h2,
 .about-panel h2,
-.contact-copy h2 {
+.contact-copy h1,
+.contact-copy h2,
+.page-hero h1,
+.page-cta h2 {
   margin: 0;
   font-size: clamp(2.4rem, 5vw, 4.4rem);
   line-height: 1;
   letter-spacing: 0;
+}
+
+.page-hero {
+  display: grid;
+  min-height: 520px;
+  align-content: end;
+  max-width: 1180px;
+  padding-top: 190px;
+}
+
+.page-hero p:last-child {
+  max-width: 760px;
+  color: var(--muted);
+  font-size: 1.2rem;
+  line-height: 1.65;
+}
+
+.page-grid {
+  padding-top: 0;
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 44px;
+  align-items: stretch;
+}
+
+.page-cta {
+  display: grid;
+  max-width: 980px;
+  gap: 26px;
+}
+
+.page-cta .button {
+  width: fit-content;
+}
+
+.page-contact {
+  min-height: 760px;
+  padding-top: 190px;
 }
 
 .work-grid {
@@ -1247,7 +1291,8 @@ textarea {
   }
 
   .about-section,
-  .contact-section {
+  .contact-section,
+  .process-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -1290,12 +1335,19 @@ textarea {
     padding-top: 132px;
   }
 
+  .page-hero,
+  .page-contact {
+    min-height: auto;
+    padding-top: 132px;
+  }
+
   .hero h1 {
     font-size: clamp(3.15rem, 18vw, 5rem);
   }
 
   .hero-actions,
-  .button {
+  .button,
+  .page-cta .button {
     width: 100%;
   }
 

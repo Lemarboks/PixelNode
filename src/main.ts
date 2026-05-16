@@ -10,7 +10,7 @@ const formStatus = document.querySelector<HTMLElement>('[data-form-status]');
 const cursorGlow = document.querySelector<HTMLElement>('[data-cursor-glow]');
 const revealItems = Array.from(
   document.querySelectorAll<HTMLElement>(
-    '.hero-copy > *, .hero-visual, .service-card, .section-heading, .work-card, .about-panel, .stats-grid > div, .contact-copy, .contact-form'
+    '.hero-copy > *, .hero-visual, .page-hero > *, .service-card, .section-heading, .work-card, .about-panel, .stats-grid > div, .contact-copy, .contact-form, .page-cta > *'
   )
 );
 const tiltCards = Array.from(document.querySelectorAll<HTMLElement>('.tilt-card'));
@@ -26,14 +26,25 @@ const closeMenu = () => {
 };
 
 const updateActiveLink = () => {
-  const current = sections.reduce((active, section) => {
-    const top = section.getBoundingClientRect().top;
-    return top <= 150 ? section.id : active;
-  }, 'home');
+  if (sections.length > 1 && window.location.hash) {
+    const current = sections.reduce((active, section) => {
+      const top = section.getBoundingClientRect().top;
+      return top <= 150 ? section.id : active;
+    }, 'home');
+
+    navLinks.forEach((link) => {
+      const isActive = link.getAttribute('href') === `#${current}`;
+      link.classList.toggle('active', isActive);
+    });
+    return;
+  }
+
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
   navLinks.forEach((link) => {
-    const isActive = link.getAttribute('href') === `#${current}`;
-    link.classList.toggle('active', isActive);
+    const href = link.getAttribute('href') || '';
+    const linkPage = href.split('#')[0] || 'index.html';
+    link.classList.toggle('active', linkPage === currentPage || (currentPage === '' && linkPage === 'index.html'));
   });
 };
 
