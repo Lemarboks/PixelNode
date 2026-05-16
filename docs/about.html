@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="PixelNode homelab console with rack view, network topology, deployment simulation, and system manifesto." />
-    <title>Server Lab | PixelNode</title>
+    <meta name="description" content="About PixelNode, a digital studio for web design, hosting, homelabs, and photography." />
+    <title>About | PixelNode</title>
     <script type="module" crossorigin src="./assets/main-BfKdwZhQ.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/main-C79DqVGz.css">
   </head>
@@ -15,49 +15,18 @@
       <header class="site-header" data-header>
         <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span class="brand-text">PIXEL<span>NODE</span></span></a>
         <button class="menu-button" type="button" aria-label="Open navigation" aria-expanded="false" data-menu-button><span></span><span></span></button>
-        <nav class="main-nav" data-nav>
-          <a href="index.html">Dashboard</a><a href="services.html">Node Status</a><a href="work.html">Web Cluster</a><a href="about.html" class="active">Server Lab</a><a href="contact.html">Media Pipeline</a>
-        </nav>
-        <button class="header-cta terminal-toggle" type="button" data-terminal-toggle>CLI Mode <span aria-hidden="true">_</span></button>
+        <nav class="main-nav" data-nav><a href="index.html">Home</a><a href="services.html">Services</a><a href="work.html">Work</a><a href="about.html" class="active">About</a><a href="contact.html">Contact</a></nav>
+        <a class="header-cta" href="contact.html">Get In Touch <span aria-hidden="true">-&gt;</span></a>
       </header>
-
       <main>
-        <section class="section page-hero">
-          <p class="eyebrow">Homelab Console <span></span></p>
-          <h1>The signature PixelNode server lab.</h1>
-          <p>Clickable rack nodes, topology mapping, deployment simulation, and storage/CPU visuals make the studio feel like operational infrastructure.</p>
+        <section class="section page-hero"><p class="eyebrow">About PixelNode <span></span></p><h1>A digital studio that connects design, infrastructure, and media.</h1><p>PixelNode exists for businesses and creators who need more than a template. We combine website design, technical setup, server curiosity, and strong visuals into one practical service.</p></section>
+        <section class="section about-section">
+          <div class="about-panel"><p class="eyebrow">How We Think <span></span></p><h2>Good websites need good foundations.</h2><p>A strong online presence is not just how a page looks. It is how fast it loads, how clearly it explains your offer, how easy it is to contact you, and whether the technical setup is reliable after launch.</p></div>
+          <div class="stats-grid"><div><strong>01</strong><span>Clear design</span></div><div><strong>02</strong><span>Reliable setup</span></div><div><strong>03</strong><span>Strong content</span></div></div>
         </section>
-
-        <section class="section lab-console">
-          <div class="rack-view" aria-label="Interactive server rack">
-            <button type="button" data-server="Edge Gateway"><span>01</span><strong>edge-gateway</strong><i>online</i></button>
-            <button type="button" data-server="Web Cluster"><span>02</span><strong>web-cluster</strong><i>online</i></button>
-            <button type="button" data-server="Media Array"><span>03</span><strong>media-array</strong><i>68%</i></button>
-            <button type="button" data-server="Backup Node"><span>04</span><strong>backup-node</strong><i>sync</i></button>
-          </div>
-          <div class="topology-map">
-            <div class="topology-mini large">
-              <span class="topology-node core"></span><span class="topology-node n1"></span><span class="topology-node n2"></span><span class="topology-node n3"></span><span class="topology-node n4"></span>
-              <i></i><i></i><i></i><i></i>
-            </div>
-            <div class="lab-readout" data-lab-readout>server selected: none</div>
-            <button class="button button-primary" type="button" data-deploy-sim>Deploy Website</button>
-          </div>
-          <div class="resource-panel">
-            <p>CPU load <meter min="0" max="100" value="42"></meter></p>
-            <p>Storage usage <meter min="0" max="100" value="68"></meter></p>
-            <p>Network throughput <meter min="0" max="100" value="76"></meter></p>
-          </div>
-        </section>
-
-        <section class="section manifesto-strip">
-          <p class="eyebrow">System Manifesto <span></span></p>
-          <h2>We build distributed systems, not websites.</h2>
-          <div class="manifesto-lines"><p>Every project is a node in a larger network.</p><p>Infrastructure is the product.</p><p>Design should reveal the system underneath.</p></div>
-        </section>
+        <section class="section manifesto-strip"><p class="eyebrow">What We Value <span></span></p><h2>Practical, polished, and built to be used.</h2><div class="manifesto-lines"><p>Every page should make the business easier to understand.</p><p>Every setup should be simple enough to maintain.</p><p>Every image should support the story the website is telling.</p></div></section>
       </main>
-      <footer class="site-footer"><a class="brand compact" href="index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span class="brand-text">PIXEL<span>NODE</span></span></a><p>Digital infrastructure studio.</p><a href="mailto:hello@pixelnode.studio">hello@pixelnode.studio</a></footer>
+      <footer class="site-footer"><a class="brand compact" href="index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span class="brand-text">PIXEL<span>NODE</span></span></a><p>Web design, hosting, homelabs, and media.</p><a href="mailto:hello@pixelnode.studio">hello@pixelnode.studio</a></footer>
     </div>
-    <aside class="terminal-panel" data-terminal><div class="terminal-head"><span>pixelnode-cli</span><button type="button" data-terminal-close>close</button></div><div class="terminal-output" data-terminal-output><p>Try: view servers, deploy project, status, open gallery</p></div><form data-terminal-form><span>&gt;</span><input name="command" autocomplete="off" placeholder="type a command" /></form></aside>
   </body>
 </html>

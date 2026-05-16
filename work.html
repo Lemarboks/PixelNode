@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="PixelNode web cluster deployments with live-style rollout status, stack logs, and project metadata." />
-    <title>Web Cluster | PixelNode</title>
+    <meta name="description" content="PixelNode work examples for websites, hosting setups, homelabs, and photography-led digital launches." />
+    <title>Work | PixelNode</title>
     <link rel="stylesheet" href="./src/styles.css" />
   </head>
   <body>
@@ -14,57 +14,26 @@
       <header class="site-header" data-header>
         <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span class="brand-text">PIXEL<span>NODE</span></span></a>
         <button class="menu-button" type="button" aria-label="Open navigation" aria-expanded="false" data-menu-button><span></span><span></span></button>
-        <nav class="main-nav" data-nav>
-          <a href="index.html">Dashboard</a><a href="services.html">Node Status</a><a href="work.html" class="active">Web Cluster</a><a href="about.html">Server Lab</a><a href="contact.html">Media Pipeline</a>
-        </nav>
-        <button class="header-cta terminal-toggle" type="button" data-terminal-toggle>CLI Mode <span aria-hidden="true">_</span></button>
+        <nav class="main-nav" data-nav><a href="index.html">Home</a><a href="services.html">Services</a><a href="work.html" class="active">Work</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+        <a class="header-cta" href="contact.html">Get In Touch <span aria-hidden="true">-&gt;</span></a>
       </header>
-
       <main>
-        <section class="section page-hero">
-          <p class="eyebrow">Web Cluster <span></span></p>
-          <h1>Projects behave like deployments.</h1>
-          <p>Each site is treated like a rollout: deployment ID, live status, stack trace, build notes, and launch route.</p>
+        <section class="section page-hero"><p class="eyebrow">Selected Work <span></span></p><h1>Examples of what PixelNode can build for you.</h1><p>These examples show the type of outcomes we create: clean websites, launch pages, hosting setups, technical systems, and media-backed brand experiences.</p></section>
+        <section class="section work-section">
+          <div class="work-grid">
+            <article class="work-card tilt-card"><div class="work-preview preview-one"><span></span><span></span><span></span></div><div><p>Website design</p><h3>Modern service business landing page</h3></div></article>
+            <article class="work-card tilt-card"><div class="work-preview preview-two"><span></span><span></span><span></span></div><div><p>Portfolio and booking</p><h3>Creative site with contact flow</h3></div></article>
+            <article class="work-card tilt-card"><div class="work-preview preview-three"><span></span><span></span><span></span></div><div><p>Hosting setup</p><h3>Static site deployment and domain setup</h3></div></article>
+          </div>
         </section>
-
-        <section class="section deployment-grid">
-          <article class="deployment-card tilt-card">
-            <div class="deploy-preview preview-one"><span></span><span></span><span></span></div>
-            <p>Deployment ID: PXN-WEB-042</p>
-            <h2>Service Brand Launch</h2>
-            <strong class="status-live">Status: live</strong>
-            <code>stack: HTML / CSS / TS / GitHub Pages</code>
-            <a href="contact.html">View Deployment -&gt;</a>
-          </article>
-          <article class="deployment-card tilt-card">
-            <div class="deploy-preview preview-two"><span></span><span></span><span></span></div>
-            <p>Deployment ID: PXN-PORT-118</p>
-            <h2>Creator Booking System</h2>
-            <strong class="status-progress">Status: in progress</strong>
-            <code>stack: Vite / Forms / Media Pipeline</code>
-            <a href="contact.html">View Deployment -&gt;</a>
-          </article>
-          <article class="deployment-card tilt-card">
-            <div class="deploy-preview preview-three"><span></span><span></span><span></span></div>
-            <p>Deployment ID: PXN-INF-207</p>
-            <h2>Startup Infrastructure Site</h2>
-            <strong>Status: archived</strong>
-            <code>stack: DNS / SSL / Static Hosting</code>
-            <a href="contact.html">View Deployment -&gt;</a>
-          </article>
-        </section>
-
-        <section class="section log-panel">
-          <p class="eyebrow">Rollout Logs <span></span></p>
-          <pre><code>[10:14] build accepted
-[10:15] responsive checks passed
-[10:16] assets compressed
-[10:17] deployment promoted to live</code></pre>
+        <section class="section media-stream">
+          <article class="frame-card tilt-card"><div class="frame-visual one"></div><div class="frame-meta"><strong>Brand Photography</strong><span>Website-ready imagery for business profiles and service pages</span></div></article>
+          <article class="frame-card tilt-card"><div class="frame-visual two"></div><div class="frame-meta"><strong>Product / Detail Shots</strong><span>Clean visual assets for landing pages and social campaigns</span></div></article>
+          <article class="frame-card tilt-card"><div class="frame-visual three"></div><div class="frame-meta"><strong>Launch Content</strong><span>Media direction that supports the website and the offer</span></div></article>
         </section>
       </main>
-      <footer class="site-footer"><a class="brand compact" href="index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span class="brand-text">PIXEL<span>NODE</span></span></a><p>Digital infrastructure studio.</p><a href="mailto:hello@pixelnode.studio">hello@pixelnode.studio</a></footer>
+      <footer class="site-footer"><a class="brand compact" href="index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span class="brand-text">PIXEL<span>NODE</span></span></a><p>Web design, hosting, homelabs, and media.</p><a href="mailto:hello@pixelnode.studio">hello@pixelnode.studio</a></footer>
     </div>
-    <aside class="terminal-panel" data-terminal><div class="terminal-head"><span>pixelnode-cli</span><button type="button" data-terminal-close>close</button></div><div class="terminal-output" data-terminal-output><p>Try: deploy project, status, view servers, open gallery</p></div><form data-terminal-form><span>&gt;</span><input name="command" autocomplete="off" placeholder="type a command" /></form></aside>
     <script type="module" src="./src/main.js"></script>
   </body>
 </html>

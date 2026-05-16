@@ -3,131 +3,74 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="PixelNode is a digital infrastructure studio for websites, servers, homelabs, and media systems." />
-    <title>PixelNode | Digital Infrastructure Studio</title>
+    <meta name="description" content="PixelNode designs websites, hosting setups, homelabs, and photography-led digital content for businesses and creators." />
+    <title>PixelNode | Web Design, Hosting & Media</title>
     <link rel="stylesheet" href="./src/styles.css" />
   </head>
   <body>
-    <div class="boot-sequence" data-boot>
-      <p>Initializing PixelNode...</p>
-      <p>Connecting to cluster...</p>
-      <p>Mounting media pipeline...</p>
-      <p>System online.</p>
-    </div>
     <div class="cursor-glow" aria-hidden="true" data-cursor-glow></div>
     <div class="ambient-field" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-
     <div class="site-shell">
       <header class="site-header" data-header>
-        <a class="brand" href="index.html" aria-label="PixelNode dashboard">
+        <a class="brand" href="index.html" aria-label="PixelNode home">
           <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
           <span class="brand-text">PIXEL<span>NODE</span></span>
         </a>
         <button class="menu-button" type="button" aria-label="Open navigation" aria-expanded="false" data-menu-button><span></span><span></span></button>
         <nav class="main-nav" data-nav>
-          <a href="index.html" class="active">Dashboard</a>
-          <a href="services.html">Node Status</a>
-          <a href="work.html">Web Cluster</a>
-          <a href="about.html">Server Lab</a>
-          <a href="contact.html">Media Pipeline</a>
+          <a href="index.html" class="active">Home</a>
+          <a href="services.html">Services</a>
+          <a href="work.html">Work</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
         </nav>
-        <button class="header-cta terminal-toggle" type="button" data-terminal-toggle>CLI Mode <span aria-hidden="true">_</span></button>
+        <a class="header-cta" href="contact.html">Get In Touch <span aria-hidden="true">-&gt;</span></a>
       </header>
 
       <main>
-        <section class="hero section system-hero">
+        <section class="hero section">
           <div class="hero-copy">
-            <p class="eyebrow">Digital Infrastructure Studio <span></span></p>
-            <h1>SYSTEM<span>ONLINE</span></h1>
-            <p class="hero-line">Websites, servers, media, and automation running as one connected PixelNode network.</p>
+            <p class="eyebrow">Build. Host. Capture. <span></span></p>
+            <h1>PIXEL<span>NODE</span></h1>
+            <p class="hero-line">Websites, hosting, homelabs, and visual content for businesses that want to look sharp online.</p>
             <p class="hero-body">
-              We build distributed digital systems, not brochures. Every website, homelab, deployment,
-              and captured frame becomes a node in a larger operating layer for your brand.
+              PixelNode helps you launch a complete digital presence: modern websites, reliable technical setup,
+              self-hosted systems, and photography/media that makes the brand feel real.
             </p>
             <div class="hero-actions">
-              <a class="button button-primary" href="services.html">View Node Status <span aria-hidden="true">-&gt;</span></a>
-              <a class="button button-secondary" href="contact.html">Open Console <span aria-hidden="true">-&gt;</span></a>
+              <a class="button button-primary" href="services.html">Explore Services <span aria-hidden="true">-&gt;</span></a>
+              <a class="button button-secondary" href="work.html">View Work <span aria-hidden="true">-&gt;</span></a>
             </div>
           </div>
-
-          <div class="hero-visual live-panel" aria-label="PixelNode live system metrics">
-            <div class="panel-header"><span>cluster://pixelnode/main</span><strong>LIVE</strong></div>
-            <div class="metric-grid">
-              <div><span>Uptime</span><strong>99.98%</strong></div>
-              <div><span>Deployments</span><strong>18</strong></div>
-              <div><span>Servers Online</span><strong>06</strong></div>
-              <div><span>Projects Running</span><strong>12</strong></div>
-            </div>
-            <div class="topology-mini">
-              <span class="topology-node core"></span>
-              <span class="topology-node n1"></span>
-              <span class="topology-node n2"></span>
-              <span class="topology-node n3"></span>
-              <span class="topology-node n4"></span>
-              <i></i><i></i><i></i><i></i>
-            </div>
-            <div class="console-feed">
-              <p><span>deploy</span> pxn-web-042 completed in 38s</p>
-              <p><span>storage</span> media-array usage 68%</p>
-              <p><span>monitor</span> all public nodes healthy</p>
+          <div class="hero-visual" aria-hidden="true">
+            <div class="orbital-grid">
+              <div class="node node-large top"></div><div class="node node-large right"></div><div class="node node-large bottom"></div><div class="node node-large left"></div>
+              <div class="node center"></div><div class="node small one"></div><div class="node small two"></div>
+              <div class="connector horizontal"></div><div class="connector vertical"></div><div class="connector diagonal-a"></div><div class="connector diagonal-b"></div>
             </div>
           </div>
         </section>
 
-        <section class="section control-grid">
-          <article class="control-card tilt-card">
-            <p>NODE STATUS</p>
-            <h2>Live operating telemetry</h2>
-            <span>uptime, builds, servers, active projects</span>
-          </article>
-          <article class="control-card tilt-card">
-            <p>WEB CLUSTER</p>
-            <h2>Deployments as project rollouts</h2>
-            <span>live status, stack logs, launch history</span>
-          </article>
-          <article class="control-card tilt-card">
-            <p>SERVER LAB</p>
-            <h2>Homelab console and rack view</h2>
-            <span>servers, storage, CPU, topology</span>
-          </article>
-          <article class="control-card tilt-card">
-            <p>MEDIA PIPELINE</p>
-            <h2>Captured nodes with frame metadata</h2>
-            <span>ISO, aperture, location, timestamp</span>
-          </article>
+        <section class="service-strip" aria-label="PixelNode services">
+          <article class="service-card tilt-card"><div class="service-icon code" aria-hidden="true"></div><h2>Web Design</h2><p>Fast, responsive websites and landing pages built around your offer, audience, and brand.</p></article>
+          <article class="service-card tilt-card"><div class="service-icon server" aria-hidden="true"></div><h2>Hosting & Setup</h2><p>Domains, SSL, email basics, deployments, and hosting configured cleanly from day one.</p></article>
+          <article class="service-card tilt-card"><div class="service-icon cloud" aria-hidden="true"></div><h2>Homelabs</h2><p>Self-hosted dashboards, storage, server setups, and home infrastructure for practical workflows.</p></article>
+          <article class="service-card tilt-card"><div class="service-icon camera" aria-hidden="true"></div><h2>Photography</h2><p>Professional photos and media direction for websites, launches, portfolios, and social content.</p></article>
         </section>
 
-        <section class="section manifesto-strip">
-          <p class="eyebrow">System Manifesto <span></span></p>
-          <h2>Infrastructure is the product.</h2>
-          <div class="manifesto-lines">
-            <p>We build distributed systems, not websites.</p>
-            <p>Every project is a node in a larger network.</p>
-            <p>The interface should feel alive, measurable, and operational.</p>
-          </div>
+        <section class="section page-cta">
+          <p class="eyebrow">One connected studio <span></span></p>
+          <h2>We bring design, infrastructure, and media together so your online presence feels complete.</h2>
+          <a class="button button-primary" href="contact.html">Start A Project <span aria-hidden="true">-&gt;</span></a>
         </section>
       </main>
 
       <footer class="site-footer">
-        <a class="brand compact" href="index.html" aria-label="PixelNode dashboard">
-          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-          <span class="brand-text">PIXEL<span>NODE</span></span>
-        </a>
-        <p>Digital infrastructure studio.</p>
+        <a class="brand compact" href="index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span class="brand-text">PIXEL<span>NODE</span></span></a>
+        <p>Web design, hosting, homelabs, and media.</p>
         <a href="mailto:hello@pixelnode.studio">hello@pixelnode.studio</a>
       </footer>
     </div>
-
-    <aside class="terminal-panel" data-terminal>
-      <div class="terminal-head"><span>pixelnode-cli</span><button type="button" data-terminal-close>close</button></div>
-      <div class="terminal-output" data-terminal-output>
-        <p>PixelNode CLI ready. Try: deploy project, view servers, open gallery, status</p>
-      </div>
-      <form data-terminal-form>
-        <span>&gt;</span>
-        <input name="command" autocomplete="off" placeholder="type a command" />
-      </form>
-    </aside>
     <script type="module" src="./src/main.js"></script>
   </body>
 </html>

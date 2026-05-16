@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="PixelNode media pipeline frame logs and project deployment request console." />
-    <title>Media Pipeline | PixelNode</title>
+    <meta name="description" content="Contact PixelNode for web design, hosting, homelab, and photography projects." />
+    <title>Contact | PixelNode</title>
     <link rel="stylesheet" href="./src/styles.css" />
   </head>
   <body>
@@ -14,63 +14,24 @@
       <header class="site-header" data-header>
         <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span class="brand-text">PIXEL<span>NODE</span></span></a>
         <button class="menu-button" type="button" aria-label="Open navigation" aria-expanded="false" data-menu-button><span></span><span></span></button>
-        <nav class="main-nav" data-nav>
-          <a href="index.html">Dashboard</a><a href="services.html">Node Status</a><a href="work.html">Web Cluster</a><a href="about.html">Server Lab</a><a href="contact.html" class="active">Media Pipeline</a>
-        </nav>
-        <button class="header-cta terminal-toggle" type="button" data-terminal-toggle>CLI Mode <span aria-hidden="true">_</span></button>
+        <nav class="main-nav" data-nav><a href="index.html">Home</a><a href="services.html">Services</a><a href="work.html">Work</a><a href="about.html">About</a><a href="contact.html" class="active">Contact</a></nav>
+        <a class="header-cta" href="contact.html">Get In Touch <span aria-hidden="true">-&gt;</span></a>
       </header>
-
       <main>
-        <section class="section page-hero">
-          <p class="eyebrow">Media Pipeline / Project Console <span></span></p>
-          <h1>Open a deployment request.</h1>
-          <p>Start a web project, server setup, or media pipeline. Photography is treated as frame telemetry, not a disconnected gallery.</p>
-        </section>
-
-        <section class="section media-stream">
-          <article class="frame-card tilt-card">
-            <div class="frame-visual one"></div>
-            <div class="frame-meta"><strong>Captured Node 001</strong><span>ISO 400 / f1.8 / CPT / 2026-05-16 16:47</span></div>
-          </article>
-          <article class="frame-card tilt-card">
-            <div class="frame-visual two"></div>
-            <div class="frame-meta"><strong>Frame Log 118</strong><span>ISO 800 / f2.8 / Studio / 2026-05-16 17:22</span></div>
-          </article>
-          <article class="frame-card tilt-card">
-            <div class="frame-visual three"></div>
-            <div class="frame-meta"><strong>Captured Node 207</strong><span>ISO 200 / f4.0 / Location / 2026-05-16 18:03</span></div>
-          </article>
-        </section>
-
         <section class="section contact-section page-contact">
-          <div class="contact-copy">
-            <p class="eyebrow">Deploy Request <span></span></p>
-            <h1>Tell us which node to build next.</h1>
-            <p>Send the essentials and we will respond with a clear next step: website plan, infrastructure quote, media session, or discovery call.</p>
-            <div class="contact-points"><span>web cluster</span><span>server lab</span><span>media pipeline</span><span>maintenance node</span></div>
-          </div>
+          <div class="contact-copy"><p class="eyebrow">Hire PixelNode <span></span></p><h1>Tell us what you want to build.</h1><p>Send the essentials and we will respond with a clear next step: website plan, hosting setup, homelab support, photography session, or discovery call.</p><div class="contact-points"><span>web design</span><span>hosting</span><span>homelabs</span><span>photography</span></div></div>
           <form class="contact-form" data-contact-form>
             <label>Name <input type="text" name="name" autocomplete="name" required /></label>
             <label>Email <input type="email" name="email" autocomplete="email" required /></label>
-            <label>
-              Node Type
-              <select name="project" required>
-                <option value="">Choose one</option>
-                <option>Web Cluster Deployment</option>
-                <option>Server Lab / Homelab Setup</option>
-                <option>Media Pipeline / Photography</option>
-                <option>Maintenance and Monitoring</option>
-              </select>
-            </label>
-            <label>Deployment Notes <textarea name="message" rows="5" placeholder="What should PixelNode deploy for you?" required></textarea></label>
-            <button class="button button-primary" type="submit">Submit Deploy Request <span aria-hidden="true">-&gt;</span></button>
+            <label>Project Type <select name="project" required><option value="">Choose one</option><option>New website</option><option>Website redesign</option><option>Hosting and domain setup</option><option>Homelab / server setup</option><option>Photography / media</option><option>Maintenance plan</option></select></label>
+            <label>Project Details <textarea name="message" rows="5" placeholder="What do you need built, fixed, hosted, or captured?" required></textarea></label>
+            <button class="button button-primary" type="submit">Start Project <span aria-hidden="true">-&gt;</span></button>
             <p class="form-status" role="status" data-form-status></p>
           </form>
         </section>
       </main>
-      <footer class="site-footer"><a class="brand compact" href="index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span class="brand-text">PIXEL<span>NODE</span></span></a><p>Digital infrastructure studio.</p><a href="mailto:hello@pixelnode.studio">hello@pixelnode.studio</a></footer>
+      <footer class="site-footer"><a class="brand compact" href="index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span class="brand-text">PIXEL<span>NODE</span></span></a><p>Web design, hosting, homelabs, and media.</p><a href="mailto:hello@pixelnode.studio">hello@pixelnode.studio</a></footer>
     </div>
-    <aside class="terminal-panel" data-terminal><div class="terminal-head"><span>pixelnode-cli</span><button type="button" data-terminal-close>close</button></div><div class="terminal-output" data-terminal-output><p>Try: open gallery, deploy project, view servers, status</p></div><form data-terminal-form><span>&gt;</span><input name="command" autocomplete="off" placeholder="type a command" /></form></aside>
     <script type="module" src="./src/main.js"></script>
   </body>
 </html>
