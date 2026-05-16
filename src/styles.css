@@ -1419,6 +1419,171 @@ meter {
   margin-bottom: 0;
 }
 
+.layout-showcase {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px;
+}
+
+.layout-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: linear-gradient(145deg, rgba(15, 17, 31, 0.86), rgba(7, 8, 14, 0.76));
+  box-shadow: var(--shadow);
+}
+
+.layout-card::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 0%), rgba(181, 140, 255, 0.2), transparent 28%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 34%);
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.layout-card:hover::before {
+  opacity: 1;
+}
+
+.layout-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.layout-card > div:last-child {
+  padding: 26px;
+}
+
+.layout-card p {
+  margin: 0 0 10px;
+  color: var(--purple-bright);
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.layout-card h3 {
+  margin: 0 0 12px;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  line-height: 1.25;
+}
+
+.layout-card span {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.layout-preview {
+  display: grid;
+  gap: 14px;
+  min-height: 330px;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 74% 24%, rgba(154, 92, 255, 0.3), transparent 11rem),
+    linear-gradient(145deg, #10121e, #070810);
+}
+
+.layout-preview div,
+.layout-preview span {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.mock-nav {
+  height: 28px;
+}
+
+.mock-hero {
+  min-height: 110px;
+  background: linear-gradient(135deg, rgba(154, 92, 255, 0.32), rgba(98, 219, 255, 0.12));
+}
+
+.mock-columns,
+.mock-gallery,
+.mock-products,
+.mock-panels,
+.mock-dashboard {
+  display: grid;
+  gap: 10px;
+}
+
+.mock-columns {
+  grid-template-columns: repeat(3, 1fr);
+  min-height: 72px;
+}
+
+.mock-wide,
+.mock-booking,
+.mock-center {
+  min-height: 74px;
+}
+
+.mock-split {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 12px;
+  min-height: 132px;
+  border: 0;
+  background: transparent;
+}
+
+.mock-gallery,
+.mock-products {
+  grid-template-columns: repeat(4, 1fr);
+  min-height: 92px;
+}
+
+.mock-dashboard,
+.mock-panels {
+  grid-template-columns: repeat(2, 1fr);
+  min-height: 190px;
+}
+
+.mock-menu {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  min-height: 154px;
+  border: 0;
+  background: transparent;
+}
+
+.portfolio-site {
+  background:
+    radial-gradient(circle at 26% 28%, rgba(255, 94, 232, 0.24), transparent 10rem),
+    linear-gradient(145deg, #10121e, #070810);
+}
+
+.saas-landing {
+  background:
+    radial-gradient(circle at 68% 32%, rgba(85, 229, 164, 0.2), transparent 11rem),
+    linear-gradient(145deg, #10121e, #070810);
+}
+
+.restaurant-layout {
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 209, 102, 0.16), transparent 11rem),
+    linear-gradient(145deg, #10121e, #070810);
+}
+
+.ecommerce-layout {
+  background:
+    radial-gradient(circle at 80% 24%, rgba(98, 219, 255, 0.2), transparent 11rem),
+    linear-gradient(145deg, #10121e, #070810);
+}
+
+.homelab-layout {
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 28px),
+    linear-gradient(145deg, #10121e, #070810);
+}
+
 .about-section {
   grid-template-columns: 1.1fr 0.9fr;
   align-items: stretch;
@@ -1804,6 +1969,7 @@ meter {
 
   .service-strip,
   .work-grid,
+  .layout-showcase,
   .metric-grid,
   .ops-grid,
   .control-grid {
@@ -1919,6 +2085,7 @@ meter {
 
   .service-strip,
   .work-grid,
+  .layout-showcase,
   .metric-grid,
   .ops-grid,
   .control-grid,
