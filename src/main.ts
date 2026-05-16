@@ -8,9 +8,18 @@ const sections = Array.from(document.querySelectorAll<HTMLElement>('main section
 const contactForm = document.querySelector<HTMLFormElement>('[data-contact-form]');
 const formStatus = document.querySelector<HTMLElement>('[data-form-status]');
 const cursorGlow = document.querySelector<HTMLElement>('[data-cursor-glow]');
+const bootSequence = document.querySelector<HTMLElement>('[data-boot]');
+const terminal = document.querySelector<HTMLElement>('[data-terminal]');
+const terminalToggle = document.querySelector<HTMLButtonElement>('[data-terminal-toggle]');
+const terminalClose = document.querySelector<HTMLButtonElement>('[data-terminal-close]');
+const terminalForm = document.querySelector<HTMLFormElement>('[data-terminal-form]');
+const terminalOutput = document.querySelector<HTMLElement>('[data-terminal-output]');
+const rackButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-server]'));
+const labReadout = document.querySelector<HTMLElement>('[data-lab-readout]');
+const deploySim = document.querySelector<HTMLButtonElement>('[data-deploy-sim]');
 const revealItems = Array.from(
   document.querySelectorAll<HTMLElement>(
-    '.hero-copy > *, .hero-visual, .page-hero > *, .service-card, .section-heading, .work-card, .about-panel, .stats-grid > div, .contact-copy, .contact-form, .page-cta > *'
+    '.hero-copy > *, .hero-visual, .page-hero > *, .service-card, .section-heading, .work-card, .about-panel, .stats-grid > div, .contact-copy, .contact-form, .page-cta > *, .control-card, .ops-card, .deployment-card, .lab-console > *, .frame-card, .manifesto-strip > *, .log-panel'
   )
 );
 const tiltCards = Array.from(document.querySelectorAll<HTMLElement>('.tilt-card'));
@@ -134,3 +143,60 @@ contactForm?.addEventListener('submit', (event) => {
 
 setHeaderState();
 updateActiveLink();
+
+window.addEventListener('load', () => {
+  window.setTimeout(() => bootSequence?.classList.add('complete'), 2100);
+});
+
+const writeTerminalLine = (text: string) => {
+  if (!terminalOutput) return;
+  const line = document.createElement('p');
+  line.textContent = text;
+  terminalOutput.append(line);
+  terminalOutput.scrollTop = terminalOutput.scrollHeight;
+};
+
+const commandMap: Record<string, string> = {
+  'deploy project': 'deploy queued -> pxn-web-052 | estimated completion: 42s',
+  'view servers': 'edge-gateway online | web-cluster online | media-array 68% | backup-node synced',
+  'open gallery': 'media pipeline opened -> 3 captured nodes decoded',
+  status: 'uptime 99.98% | active deployments 18 | servers online 6 | projects running 12',
+  help: 'commands: deploy project, view servers, open gallery, status'
+};
+
+terminalToggle?.addEventListener('click', () => {
+  document.body.classList.toggle('terminal-mode');
+  terminal?.classList.toggle('open');
+});
+
+terminalClose?.addEventListener('click', () => {
+  document.body.classList.remove('terminal-mode');
+  terminal?.classList.remove('open');
+});
+
+terminalForm?.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const input = terminalForm.querySelector<HTMLInputElement>('input');
+  const command = String(input?.value || '').trim().toLowerCase();
+
+  if (!command) return;
+  writeTerminalLine(`> ${command}`);
+  writeTerminalLine(commandMap[command] || 'unknown command. type: help');
+
+  if (input) input.value = '';
+});
+
+rackButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    rackButtons.forEach((item) => item.classList.remove('selected'));
+    button.classList.add('selected');
+    if (labReadout) {
+      labReadout.textContent = `server selected: ${button.getAttribute('data-server')} | diagnostics nominal`;
+    }
+  });
+});
+
+deploySim?.addEventListener('click', () => {
+  if (labReadout) labReadout.textContent = 'deploying website... build passed -> route live';
+  writeTerminalLine('deploy simulation complete -> pxn-demo promoted to live');
+});

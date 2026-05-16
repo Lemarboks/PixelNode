@@ -6,9 +6,18 @@ const sections = Array.from(document.querySelectorAll('main section[id]'));
 const contactForm = document.querySelector('[data-contact-form]');
 const formStatus = document.querySelector('[data-form-status]');
 const cursorGlow = document.querySelector('[data-cursor-glow]');
+const bootSequence = document.querySelector('[data-boot]');
+const terminal = document.querySelector('[data-terminal]');
+const terminalToggle = document.querySelector('[data-terminal-toggle]');
+const terminalClose = document.querySelector('[data-terminal-close]');
+const terminalForm = document.querySelector('[data-terminal-form]');
+const terminalOutput = document.querySelector('[data-terminal-output]');
+const rackButtons = Array.from(document.querySelectorAll('[data-server]'));
+const labReadout = document.querySelector('[data-lab-readout]');
+const deploySim = document.querySelector('[data-deploy-sim]');
 const revealItems = Array.from(
   document.querySelectorAll(
-    '.hero-copy > *, .hero-visual, .page-hero > *, .service-card, .section-heading, .work-card, .about-panel, .stats-grid > div, .contact-copy, .contact-form, .page-cta > *'
+    '.hero-copy > *, .hero-visual, .page-hero > *, .service-card, .section-heading, .work-card, .about-panel, .stats-grid > div, .contact-copy, .contact-form, .page-cta > *, .control-card, .ops-card, .deployment-card, .lab-console > *, .frame-card, .manifesto-strip > *, .log-panel'
   )
 );
 const tiltCards = Array.from(document.querySelectorAll('.tilt-card'));
@@ -132,3 +141,60 @@ contactForm?.addEventListener('submit', (event) => {
 
 setHeaderState();
 updateActiveLink();
+
+window.addEventListener('load', () => {
+  window.setTimeout(() => bootSequence?.classList.add('complete'), 2100);
+});
+
+const writeTerminalLine = (text) => {
+  if (!terminalOutput) return;
+  const line = document.createElement('p');
+  line.textContent = text;
+  terminalOutput.append(line);
+  terminalOutput.scrollTop = terminalOutput.scrollHeight;
+};
+
+const commandMap = {
+  'deploy project': 'deploy queued -> pxn-web-052 | estimated completion: 42s',
+  'view servers': 'edge-gateway online | web-cluster online | media-array 68% | backup-node synced',
+  'open gallery': 'media pipeline opened -> 3 captured nodes decoded',
+  status: 'uptime 99.98% | active deployments 18 | servers online 6 | projects running 12',
+  help: 'commands: deploy project, view servers, open gallery, status'
+};
+
+terminalToggle?.addEventListener('click', () => {
+  document.body.classList.toggle('terminal-mode');
+  terminal?.classList.toggle('open');
+});
+
+terminalClose?.addEventListener('click', () => {
+  document.body.classList.remove('terminal-mode');
+  terminal?.classList.remove('open');
+});
+
+terminalForm?.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const input = terminalForm.querySelector('input');
+  const command = String(input?.value || '').trim().toLowerCase();
+
+  if (!command) return;
+  writeTerminalLine(`> ${command}`);
+  writeTerminalLine(commandMap[command] || 'unknown command. type: help');
+
+  if (input) input.value = '';
+});
+
+rackButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    rackButtons.forEach((item) => item.classList.remove('selected'));
+    button.classList.add('selected');
+    if (labReadout) {
+      labReadout.textContent = `server selected: ${button.getAttribute('data-server')} | diagnostics nominal`;
+    }
+  });
+});
+
+deploySim?.addEventListener('click', () => {
+  if (labReadout) labReadout.textContent = 'deploying website... build passed -> route live';
+  writeTerminalLine('deploy simulation complete -> pxn-demo promoted to live');
+});
