@@ -1634,12 +1634,7 @@ meter {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  display: grid;
-  min-height: 900px;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.42fr);
-  grid-template-rows: 1fr auto;
-  gap: clamp(20px, 3vw, 36px);
-  align-items: end;
+  min-height: 980px;
   padding-top: 190px;
 }
 
@@ -1696,8 +1691,9 @@ meter {
 }
 
 .about-hud,
-.about-signal {
-  position: relative;
+.about-signal,
+.about-value {
+  position: absolute;
   overflow: hidden;
   border: 1px solid rgba(98, 219, 255, 0.3);
   border-radius: 8px;
@@ -1706,10 +1702,12 @@ meter {
     repeating-linear-gradient(90deg, rgba(98, 219, 255, 0.08) 0 1px, transparent 1px 18px);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38), 0 0 36px rgba(98, 219, 255, 0.16);
   backdrop-filter: blur(14px);
+  animation: aboutHudFloat 6s ease-in-out infinite;
 }
 
 .about-hud::before,
-.about-signal::before {
+.about-signal::before,
+.about-value::before {
   position: absolute;
   inset: 0;
   content: "";
@@ -1721,20 +1719,26 @@ meter {
 }
 
 .about-hud > *,
-.about-signal > * {
+.about-signal > *,
+.about-value > * {
   position: relative;
   z-index: 1;
 }
 
 .about-hud-primary {
-  max-width: 980px;
-  padding: clamp(28px, 4vw, 54px);
+  top: 18%;
+  left: clamp(20px, 5vw, 84px);
+  width: min(780px, 58vw);
+  padding: clamp(26px, 3vw, 46px);
+  animation-delay: -0.5s;
 }
 
 .about-hud-secondary {
-  align-self: start;
-  max-width: 520px;
+  top: 28%;
+  right: clamp(20px, 5vw, 84px);
+  width: min(430px, 30vw);
   padding: clamp(24px, 3vw, 38px);
+  animation-delay: -2s;
 }
 
 .about-hud h1,
@@ -1745,12 +1749,12 @@ meter {
 }
 
 .about-hud h1 {
-  font-size: clamp(2.7rem, 6vw, 5.6rem);
+  font-size: clamp(2.4rem, 5vw, 5.1rem);
   line-height: 0.95;
 }
 
 .about-hud h2 {
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-size: clamp(1.55rem, 2.5vw, 2.35rem);
   line-height: 1.02;
 }
 
@@ -1763,18 +1767,34 @@ meter {
 }
 
 .about-signal-stack {
-  display: grid;
-  grid-column: 1 / -1;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  position: static;
 }
 
 .about-signal {
   display: grid;
-  min-height: 138px;
+  width: min(250px, 22vw);
+  min-height: 118px;
   align-content: center;
   gap: 8px;
   padding: 24px;
+}
+
+.about-signal:nth-child(1) {
+  left: 8%;
+  bottom: 18%;
+  animation-delay: -1.2s;
+}
+
+.about-signal:nth-child(2) {
+  left: 42%;
+  bottom: 8%;
+  animation-delay: -2.8s;
+}
+
+.about-signal:nth-child(3) {
+  right: 8%;
+  bottom: 18%;
+  animation-delay: -4s;
 }
 
 .about-signal strong {
@@ -1807,6 +1827,41 @@ meter {
 
 .about-signal:nth-child(3) {
   transition-delay: 560ms;
+}
+
+.about-value-stack {
+  position: static;
+}
+
+.about-value {
+  width: min(300px, 24vw);
+  margin: 0;
+  padding: 18px 20px;
+  color: #f2fbff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.about-value:nth-child(1) {
+  top: 50%;
+  left: 6%;
+  animation-delay: -3.4s;
+  transition-delay: 680ms;
+}
+
+.about-value:nth-child(2) {
+  top: 52%;
+  right: 6%;
+  animation-delay: -1.7s;
+  transition-delay: 780ms;
+}
+
+.about-value:nth-child(3) {
+  right: 28%;
+  bottom: 27%;
+  animation-delay: -4.8s;
+  transition-delay: 880ms;
 }
 
 .about-section {
@@ -2105,6 +2160,19 @@ meter {
   }
 }
 
+@keyframes aboutHudFloat {
+  0%,
+  100% {
+    translate: 0 0;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38), 0 0 28px rgba(98, 219, 255, 0.12);
+  }
+
+  50% {
+    translate: 0 -8px;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.44), 0 0 44px rgba(98, 219, 255, 0.24);
+  }
+}
+
 .form-status {
   min-height: 24px;
   margin: 0;
@@ -2212,14 +2280,31 @@ meter {
   }
 
   .about-video-stage {
-    grid-template-columns: 1fr;
-    min-height: 980px;
-    align-items: end;
+    min-height: 1180px;
+  }
+
+  .about-hud-primary {
+    top: 14%;
+    width: calc(100% - 48px);
   }
 
   .about-hud-secondary {
-    max-width: 680px;
-    align-self: end;
+    top: 40%;
+    right: 24px;
+    width: min(520px, calc(100% - 48px));
+  }
+
+  .about-signal {
+    width: min(220px, 28vw);
+  }
+
+  .about-value {
+    width: min(280px, 34vw);
+  }
+
+  .about-value:nth-child(3) {
+    right: 18%;
+    bottom: 30%;
   }
 }
 
@@ -2268,18 +2353,35 @@ meter {
   }
 
   .about-video-stage {
+    display: grid;
     min-height: 0;
+    gap: 14px;
     padding-top: 132px;
   }
 
   .about-hud-primary,
   .about-hud-secondary,
-  .about-signal {
+  .about-signal,
+  .about-value {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: 100%;
     padding: 22px;
+    animation: none;
   }
 
   .about-signal-stack {
+    display: grid;
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .about-value-stack {
+    display: grid;
+    gap: 14px;
   }
 
   .about-hud h1 {
