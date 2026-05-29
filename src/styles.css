@@ -1634,7 +1634,7 @@ meter {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  min-height: 980px;
+  min-height: 920px;
   padding-top: 190px;
 }
 
@@ -1657,13 +1657,13 @@ meter {
 }
 
 .about-video-background img {
-  opacity: 0.72;
-  filter: saturate(1.12) contrast(1.04);
+  opacity: 0.66;
+  filter: saturate(1.05) contrast(1.02);
 }
 
 .about-video-background video {
-  opacity: 0.72;
-  filter: saturate(1.18) contrast(1.08);
+  opacity: 0.66;
+  filter: saturate(1.08) contrast(1.04);
 }
 
 .about-video-stage::before,
@@ -1677,33 +1677,32 @@ meter {
 
 .about-video-stage::before {
   background:
-    linear-gradient(90deg, rgba(5, 6, 11, 0.88) 0%, rgba(5, 6, 11, 0.42) 48%, rgba(5, 6, 11, 0.72) 100%),
-    linear-gradient(180deg, rgba(5, 6, 11, 0.82) 0%, transparent 34%, rgba(5, 6, 11, 0.9) 100%);
+    linear-gradient(90deg, rgba(5, 6, 11, 0.9) 0%, rgba(5, 6, 11, 0.52) 50%, rgba(5, 6, 11, 0.86) 100%),
+    linear-gradient(180deg, rgba(5, 6, 11, 0.86) 0%, rgba(5, 6, 11, 0.28) 44%, rgba(5, 6, 11, 0.92) 100%);
 }
 
 .about-video-stage::after {
   background-image:
-    linear-gradient(rgba(98, 219, 255, 0.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(181, 140, 255, 0.11) 1px, transparent 1px);
-  background-size: 58px 58px;
+    linear-gradient(rgba(98, 219, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(181, 140, 255, 0.07) 1px, transparent 1px);
+  background-size: 72px 72px;
   mask-image: radial-gradient(circle at 50% 54%, rgba(0, 0, 0, 0.72), transparent 72%);
-  opacity: 0.5;
+  opacity: 0.38;
 }
 
 .about-hud,
 .about-signal,
 .about-value {
   position: absolute;
+  z-index: 1;
   overflow: hidden;
-  border: 1px solid rgba(98, 219, 255, 0.3);
+  border: 1px solid rgba(214, 226, 255, 0.18);
   border-radius: 8px;
   background:
-    linear-gradient(145deg, rgba(7, 12, 22, 0.72), rgba(8, 5, 18, 0.62)),
-    repeating-linear-gradient(90deg, rgba(98, 219, 255, 0.08) 0 1px, transparent 1px 18px);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.34), 0 0 22px rgba(98, 219, 255, 0.12);
+    linear-gradient(145deg, rgba(8, 12, 22, 0.82), rgba(8, 7, 16, 0.72)),
+    repeating-linear-gradient(90deg, rgba(98, 219, 255, 0.045) 0 1px, transparent 1px 22px);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.36), inset 0 1px rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(6px);
-  animation: aboutHudFloat 6s ease-in-out infinite;
-  will-change: translate;
 }
 
 .about-hud::before,
@@ -1713,9 +1712,9 @@ meter {
   inset: 0;
   content: "";
   background:
-    radial-gradient(circle at 18% 0%, rgba(98, 219, 255, 0.22), transparent 26%),
-    linear-gradient(120deg, rgba(255, 255, 255, 0.12), transparent 38%);
-  opacity: 0.78;
+    radial-gradient(circle at 18% 0%, rgba(98, 219, 255, 0.14), transparent 28%),
+    linear-gradient(120deg, rgba(255, 255, 255, 0.08), transparent 38%);
+  opacity: 0.72;
   pointer-events: none;
 }
 
@@ -1727,19 +1726,17 @@ meter {
 }
 
 .about-hud-primary {
-  top: 18%;
+  top: 20%;
   left: clamp(20px, 5vw, 84px);
-  width: min(780px, 58vw);
-  padding: clamp(26px, 3vw, 46px);
-  animation-delay: -0.5s;
+  width: min(760px, 56vw);
+  padding: clamp(30px, 4vw, 56px);
 }
 
 .about-hud-secondary {
-  top: 28%;
+  top: 22%;
   right: clamp(20px, 5vw, 84px);
-  width: min(430px, 30vw);
-  padding: clamp(24px, 3vw, 38px);
-  animation-delay: -2s;
+  width: min(460px, 31vw);
+  padding: clamp(24px, 3vw, 36px);
 }
 
 .about-hud h1,
@@ -1750,20 +1747,20 @@ meter {
 }
 
 .about-hud h1 {
-  font-size: clamp(2.4rem, 5vw, 5.1rem);
-  line-height: 0.95;
+  font-size: clamp(2.45rem, 4.8vw, 4.8rem);
+  line-height: 0.98;
 }
 
 .about-hud h2 {
-  font-size: clamp(1.55rem, 2.5vw, 2.35rem);
-  line-height: 1.02;
+  font-size: clamp(1.55rem, 2.1vw, 2.15rem);
+  line-height: 1.08;
 }
 
 .about-hud p:last-child {
   max-width: 760px;
-  margin: 24px 0 0;
-  color: #d9f7ff;
-  font-size: clamp(1rem, 1.6vw, 1.18rem);
+  margin: 22px 0 0;
+  color: #dcecf3;
+  font-size: clamp(1rem, 1.45vw, 1.12rem);
   line-height: 1.62;
 }
 
@@ -1773,39 +1770,36 @@ meter {
 
 .about-signal {
   display: grid;
-  width: min(250px, 22vw);
-  min-height: 118px;
+  width: min(240px, 21vw);
+  min-height: 112px;
   align-content: center;
   gap: 8px;
-  padding: 24px;
+  padding: 22px;
 }
 
 .about-signal:nth-child(1) {
-  left: 8%;
-  bottom: 18%;
-  animation-delay: -1.2s;
+  left: clamp(20px, 5vw, 84px);
+  bottom: 13%;
 }
 
 .about-signal:nth-child(2) {
-  left: 42%;
-  bottom: 8%;
-  animation-delay: -2.8s;
+  left: calc(clamp(20px, 5vw, 84px) + min(240px, 21vw) + 18px);
+  bottom: 13%;
 }
 
 .about-signal:nth-child(3) {
-  right: 8%;
-  bottom: 18%;
-  animation-delay: -4s;
+  left: calc(clamp(20px, 5vw, 84px) + (min(240px, 21vw) * 2) + 36px);
+  bottom: 13%;
 }
 
 .about-signal strong {
-  color: var(--cyan);
-  font-size: 1.35rem;
-  text-shadow: 0 0 22px rgba(98, 219, 255, 0.46);
+  color: var(--purple-bright);
+  font-size: 1.1rem;
+  text-shadow: 0 0 18px rgba(181, 140, 255, 0.34);
 }
 
 .about-signal span {
-  color: #f2fbff;
+  color: #f4f1fb;
   font-size: clamp(1rem, 1.6vw, 1.18rem);
   font-weight: 800;
 }
@@ -1835,33 +1829,30 @@ meter {
 }
 
 .about-value {
-  width: min(300px, 24vw);
+  width: min(440px, 31vw);
   margin: 0;
-  padding: 18px 20px;
-  color: #f2fbff;
-  font-size: 0.95rem;
-  font-weight: 700;
+  padding: 16px 18px;
+  color: #dcecf3;
+  font-size: 0.92rem;
+  font-weight: 650;
   line-height: 1.45;
 }
 
 .about-value:nth-child(1) {
-  top: 50%;
-  left: 6%;
-  animation-delay: -3.4s;
+  right: clamp(20px, 5vw, 84px);
+  bottom: calc(13% + 152px);
   transition-delay: 680ms;
 }
 
 .about-value:nth-child(2) {
-  top: 52%;
-  right: 6%;
-  animation-delay: -1.7s;
+  right: clamp(20px, 5vw, 84px);
+  bottom: calc(13% + 88px);
   transition-delay: 780ms;
 }
 
 .about-value:nth-child(3) {
-  right: 28%;
-  bottom: 27%;
-  animation-delay: -4.8s;
+  right: clamp(20px, 5vw, 84px);
+  bottom: 13%;
   transition-delay: 880ms;
 }
 
@@ -2279,31 +2270,60 @@ meter {
   }
 
   .about-video-stage {
-    min-height: 1180px;
+    min-height: 1080px;
   }
 
   .about-hud-primary {
     top: 14%;
+    left: 24px;
     width: calc(100% - 48px);
   }
 
   .about-hud-secondary {
-    top: 40%;
+    top: 44%;
     right: 24px;
     width: min(520px, calc(100% - 48px));
   }
 
   .about-signal {
-    width: min(220px, 28vw);
+    width: calc((100% - 84px) / 3);
+  }
+
+  .about-signal:nth-child(1) {
+    left: 24px;
+    bottom: 20%;
+  }
+
+  .about-signal:nth-child(2) {
+    left: calc(42px + ((100% - 84px) / 3));
+    bottom: 20%;
+  }
+
+  .about-signal:nth-child(3) {
+    left: auto;
+    right: 24px;
+    bottom: 20%;
   }
 
   .about-value {
-    width: min(280px, 34vw);
+    width: calc((100% - 72px) / 3);
+  }
+
+  .about-value:nth-child(1) {
+    right: auto;
+    left: 24px;
+    bottom: 6%;
+  }
+
+  .about-value:nth-child(2) {
+    right: auto;
+    left: calc(36px + ((100% - 72px) / 3));
+    bottom: 6%;
   }
 
   .about-value:nth-child(3) {
-    right: 18%;
-    bottom: 30%;
+    right: 24px;
+    bottom: 6%;
   }
 }
 
