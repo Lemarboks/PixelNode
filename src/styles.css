@@ -1700,9 +1700,10 @@ meter {
   background:
     linear-gradient(145deg, rgba(7, 12, 22, 0.72), rgba(8, 5, 18, 0.62)),
     repeating-linear-gradient(90deg, rgba(98, 219, 255, 0.08) 0 1px, transparent 1px 18px);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38), 0 0 36px rgba(98, 219, 255, 0.16);
-  backdrop-filter: blur(14px);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.34), 0 0 22px rgba(98, 219, 255, 0.12);
+  backdrop-filter: blur(6px);
   animation: aboutHudFloat 6s ease-in-out infinite;
+  will-change: translate;
 }
 
 .about-hud::before,
@@ -2164,12 +2165,10 @@ meter {
   0%,
   100% {
     translate: 0 0;
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38), 0 0 28px rgba(98, 219, 255, 0.12);
   }
 
   50% {
-    translate: 0 -8px;
-    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.44), 0 0 44px rgba(98, 219, 255, 0.24);
+    translate: 0 -5px;
   }
 }
 
