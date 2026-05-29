@@ -403,12 +403,21 @@ textarea {
     linear-gradient(135deg, #04050a, #090913);
 }
 
+.hero-background img,
 .hero-background video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.hero-background img {
+  opacity: 0.58;
+  filter: saturate(1.12) contrast(1.04);
+}
+
+.hero-background video {
   opacity: 0.58;
   filter: saturate(1.18) contrast(1.08);
 }
