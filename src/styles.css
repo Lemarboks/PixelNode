@@ -386,11 +386,9 @@ textarea {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  display: grid;
+  display: flex;
   min-height: 820px;
-  grid-template-columns: minmax(0, 0.94fr) minmax(390px, 1fr);
   align-items: center;
-  gap: 40px;
   padding-top: 180px;
 }
 
@@ -441,10 +439,10 @@ textarea {
   animation: terrainGlow 6s ease-in-out infinite alternate;
 }
 
-.hero-copy,
-.hero-visual {
+.hero-copy {
   position: relative;
   z-index: 1;
+  max-width: 850px;
 }
 
 .eyebrow {
