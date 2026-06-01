@@ -21,7 +21,9 @@ const revealItems = Array.from(
   )
 );
 const tiltCards = Array.from(document.querySelectorAll('.tilt-card'));
-const canAnimate = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+const canAnimate = !prefersReducedMotion && !coarsePointer;
 
 const setHeaderState = () => {
   header?.classList.toggle('scrolled', window.scrollY > 12);

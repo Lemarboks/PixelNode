@@ -2492,9 +2492,10 @@ meter {
 }
 
 .home-video-hero {
+  display: grid;
   min-height: 100svh;
-  align-items: center;
-  justify-content: center;
+  min-height: 100dvh;
+  place-items: center;
   padding: clamp(120px, 16vh, 180px) clamp(18px, 5vw, 84px) clamp(42px, 8vh, 92px);
   text-align: center;
 }
@@ -2507,6 +2508,7 @@ meter {
 .home-video-hero .hero-background video {
   opacity: 1;
   filter: saturate(1.08) contrast(1.04);
+  object-position: center center;
 }
 
 .home-video-hero .hero-background::after {
@@ -2586,7 +2588,21 @@ meter {
 @media (max-width: 680px) {
   .home-video-hero {
     min-height: 100svh;
-    padding: 112px 14px 30px;
+    min-height: 100dvh;
+    padding: 104px 14px 28px;
+  }
+
+  .home-video-hero .hero-background img,
+  .home-video-hero .hero-background video {
+    filter: none;
+    object-position: center center;
+  }
+
+  .cursor-glow,
+  .ambient-field,
+  body::before,
+  body::after {
+    display: none;
   }
 
   .hero-center-copy .eyebrow {
@@ -2621,6 +2637,20 @@ meter {
     min-height: 50px;
     padding: 0 12px;
     font-size: clamp(0.74rem, 3.4vw, 0.9rem);
+  }
+
+  .button:hover,
+  .header-cta:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 680px) and (orientation: portrait) {
+  .home-video-hero .hero-background img,
+  .home-video-hero .hero-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
