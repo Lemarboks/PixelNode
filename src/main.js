@@ -25,11 +25,13 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
 const backgroundVideos = Array.from(document.querySelectorAll('.hero-background video'));
 const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+const isSamsungAndroid = /Samsung|SM-|SAMSUNG/i.test(navigator.userAgent);
 const lowPowerDevice =
   prefersReducedMotion ||
   Boolean(connection?.saveData) ||
   (coarsePointer &&
     (/Android/i.test(navigator.userAgent) ||
+      isSamsungAndroid ||
       (navigator.deviceMemory && navigator.deviceMemory <= 4) ||
       navigator.hardwareConcurrency <= 4));
 const canAnimate = !lowPowerDevice && !coarsePointer;
@@ -41,6 +43,12 @@ if (lowPowerDevice) {
     video.pause();
     video.removeAttribute('autoplay');
     video.preload = 'none';
+    video.querySelectorAll('source').forEach((source) => {
+      source.dataset.src = source.getAttribute('src') || '';
+      source.removeAttribute('src');
+    });
+    video.removeAttribute('src');
+    video.load();
   });
 }
 
@@ -85,10 +93,22 @@ navLinks.forEach((link) => {
   link.addEventListener('click', closeMenu);
 });
 
+let scrollTicking = false;
+
 window.addEventListener('scroll', () => {
+  if (scrollTicking) return;
+  scrollTicking = true;
+  window.requestAnimationFrame(() => {
+    scrollTicking = false;
+    setHeaderState();
+    updateActiveLink();
+  });
+}, { passive: true });
+
+window.addEventListener('resize', () => {
   setHeaderState();
   updateActiveLink();
-});
+}, { passive: true });
 
 if (canAnimate) {
   revealItems.forEach((item) => item.classList.add('reveal'));

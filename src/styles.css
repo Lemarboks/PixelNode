@@ -404,6 +404,17 @@ textarea {
   scroll-margin-top: 110px;
 }
 
+main > .section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 760px;
+}
+
+.hero,
+.home-video-hero,
+.page-hero {
+  content-visibility: visible;
+}
+
 .hero {
   position: relative;
   isolation: isolate;
@@ -690,6 +701,7 @@ textarea {
 .about-image-panel {
   position: relative;
   overflow: hidden;
+  contain: layout paint;
   min-height: clamp(320px, 42vw, 560px);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -734,6 +746,7 @@ textarea {
 .stats-grid div {
   position: relative;
   overflow: hidden;
+  contain: layout paint;
   border: 1px solid var(--line);
   border-radius: 8px;
   background:
@@ -1076,6 +1089,7 @@ textarea {
 .heatmap {
   position: relative;
   overflow: hidden;
+  contain: layout paint;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(4, 6, 14, 0.74);
@@ -1654,6 +1668,7 @@ meter {
 .layout-card {
   position: relative;
   overflow: hidden;
+  contain: layout paint;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: linear-gradient(145deg, rgba(15, 17, 31, 0.86), rgba(7, 8, 14, 0.76));
@@ -2211,6 +2226,16 @@ html.low-power .services-visual-panel:hover img,
 html.low-power .about-image-panel:hover img,
 html.low-power .layout-card:hover .layout-preview img,
 html.low-power .frame-card:hover .frame-visual img {
+  transform: none;
+}
+
+html.low-power main > .section {
+  contain-intrinsic-size: auto 620px;
+}
+
+html.low-power .reveal,
+html.low-power .hero-center-copy > * {
+  opacity: 1;
   transform: none;
 }
 

@@ -33,11 +33,13 @@ const navWithHints = navigator as Navigator & {
   deviceMemory?: number;
 };
 const connection = navWithHints.connection || navWithHints.mozConnection || navWithHints.webkitConnection;
+const isSamsungAndroid = /Samsung|SM-|SAMSUNG/i.test(navigator.userAgent);
 const lowPowerDevice =
   prefersReducedMotion ||
   Boolean(connection?.saveData) ||
   (coarsePointer &&
     (/Android/i.test(navigator.userAgent) ||
+      isSamsungAndroid ||
       Boolean(navWithHints.deviceMemory && navWithHints.deviceMemory <= 4) ||
       navigator.hardwareConcurrency <= 4));
 const canAnimate = !lowPowerDevice && !coarsePointer;
@@ -49,6 +51,12 @@ if (lowPowerDevice) {
     video.pause();
     video.removeAttribute('autoplay');
     video.preload = 'none';
+    video.querySelectorAll('source').forEach((source) => {
+      source.dataset.src = source.getAttribute('src') || '';
+      source.removeAttribute('src');
+    });
+    video.removeAttribute('src');
+    video.load();
   });
 }
 
@@ -93,10 +101,22 @@ navLinks.forEach((link) => {
   link.addEventListener('click', closeMenu);
 });
 
+let scrollTicking = false;
+
 window.addEventListener('scroll', () => {
+  if (scrollTicking) return;
+  scrollTicking = true;
+  window.requestAnimationFrame(() => {
+    scrollTicking = false;
+    setHeaderState();
+    updateActiveLink();
+  });
+}, { passive: true });
+
+window.addEventListener('resize', () => {
   setHeaderState();
   updateActiveLink();
-});
+}, { passive: true });
 
 if (canAnimate) {
   revealItems.forEach((item) => item.classList.add('reveal'));
