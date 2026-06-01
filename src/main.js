@@ -146,7 +146,7 @@ contactForm?.addEventListener('submit', (event) => {
     formStatus.textContent = 'Opening your email app with the project details ready to send.';
   }
 
-  window.location.href = `mailto:hello@pixelnode.studio?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:quotes@pixelnodestudio.co.za?subject=${subject}&body=${body}`;
   contactForm.reset();
 });
 
