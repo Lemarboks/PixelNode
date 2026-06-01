@@ -203,6 +203,10 @@ textarea {
   display: none;
 }
 
+.home-footer {
+  display: none;
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
