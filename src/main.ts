@@ -42,11 +42,13 @@ const lowPowerDevice =
       isSamsungAndroid ||
       Boolean(navWithHints.deviceMemory && navWithHints.deviceMemory <= 4) ||
       navigator.hardwareConcurrency <= 4));
+const disableBackgroundVideo = prefersReducedMotion || Boolean(connection?.saveData);
 const canAnimate = !lowPowerDevice && !coarsePointer;
 
 document.documentElement.classList.toggle('low-power', lowPowerDevice);
+document.documentElement.classList.toggle('no-video', disableBackgroundVideo);
 
-if (lowPowerDevice) {
+if (disableBackgroundVideo) {
   backgroundVideos.forEach((video) => {
     video.pause();
     video.removeAttribute('autoplay');

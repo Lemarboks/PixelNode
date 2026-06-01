@@ -2172,11 +2172,11 @@ html.low-power .ambient-field {
   display: none;
 }
 
-html.low-power .hero-background video {
+html.no-video .hero-background video {
   display: none;
 }
 
-html.low-power .hero-background img {
+html.no-video .hero-background img {
   opacity: 1;
 }
 
@@ -2990,19 +2990,31 @@ html.low-power .hero-center-copy > * {
     width: min(100%, 520px);
     justify-items: center;
     text-align: center;
+    margin-inline: auto;
+    padding-inline: 0;
+  }
+
+  .hero-center-copy h1 {
+    width: 100%;
+    max-width: 20rem;
+    justify-self: center;
+    font-size: clamp(2.55rem, 14vw, 3.85rem);
+    line-height: 0.9;
+    text-align: center;
+    overflow-wrap: normal;
   }
 
   .hero-center-copy .hero-line {
-    max-width: 24rem;
+    max-width: 20rem;
     margin: 24px auto 0;
     text-align: center;
-    font-size: clamp(1.08rem, 5.2vw, 1.42rem);
+    font-size: clamp(1rem, 4.8vw, 1.28rem);
     line-height: 1.22;
   }
 
   .hero-center-copy .hero-actions {
     grid-template-columns: 1fr;
-    width: min(100%, 360px);
+    width: min(100%, 320px);
     gap: 12px;
     margin-top: 30px;
     justify-items: center;
