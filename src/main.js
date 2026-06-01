@@ -24,6 +24,15 @@ const tiltCards = Array.from(document.querySelectorAll('.tilt-card'));
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
 const canAnimate = !prefersReducedMotion && !coarsePointer;
+const backgroundVideos = Array.from(document.querySelectorAll('.hero-background video'));
+
+if (prefersReducedMotion) {
+  backgroundVideos.forEach((video) => {
+    video.pause();
+    video.removeAttribute('autoplay');
+    video.preload = 'none';
+  });
+}
 
 const setHeaderState = () => {
   header?.classList.toggle('scrolled', window.scrollY > 12);
