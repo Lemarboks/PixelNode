@@ -2176,6 +2176,18 @@ meter {
   }
 }
 
+@keyframes heroWordIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 .form-status {
   min-height: 24px;
   margin: 0;
@@ -2544,6 +2556,29 @@ meter {
   text-shadow: 0 22px 70px rgba(0, 0, 0, 0.82), 0 0 24px rgba(0, 0, 0, 0.52);
 }
 
+.hero-center-copy > * {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  animation: heroWordIn 720ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  will-change: opacity, transform;
+}
+
+.hero-center-copy .eyebrow {
+  animation-delay: 120ms;
+}
+
+.hero-center-copy h1 {
+  animation-delay: 240ms;
+}
+
+.hero-center-copy .hero-line {
+  animation-delay: 380ms;
+}
+
+.hero-center-copy .hero-actions {
+  animation-delay: 520ms;
+}
+
 .hero-center-copy .eyebrow {
   justify-content: center;
   color: #ffffff;
@@ -2686,6 +2721,13 @@ meter {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  .hero-center-copy > * {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    will-change: auto;
   }
 }
 
