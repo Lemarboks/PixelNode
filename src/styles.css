@@ -2869,17 +2869,21 @@ meter {
   }
 
   .home-video-hero {
-    place-items: end center;
+    place-items: center;
     padding: 118px 20px 44px;
+    text-align: center;
   }
 
   .hero-center-copy {
     width: min(100%, 520px);
+    justify-items: center;
+    text-align: center;
   }
 
   .hero-center-copy .hero-line {
     max-width: 24rem;
     margin: 24px auto 0;
+    text-align: center;
     font-size: clamp(1.08rem, 5.2vw, 1.42rem);
     line-height: 1.22;
   }
@@ -2889,9 +2893,12 @@ meter {
     width: min(100%, 360px);
     gap: 12px;
     margin-top: 30px;
+    justify-items: center;
+    justify-self: center;
   }
 
   .hero-center-copy .button {
+    justify-self: center;
     min-height: 54px;
     padding: 0 18px;
     font-size: 0.94rem;
