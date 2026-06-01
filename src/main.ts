@@ -23,7 +23,34 @@ const revealItems = Array.from(
   )
 );
 const tiltCards = Array.from(document.querySelectorAll<HTMLElement>('.tilt-card'));
-const canAnimate = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+const backgroundVideos = Array.from(document.querySelectorAll<HTMLVideoElement>('.hero-background video'));
+const navWithHints = navigator as Navigator & {
+  connection?: { saveData?: boolean };
+  mozConnection?: { saveData?: boolean };
+  webkitConnection?: { saveData?: boolean };
+  deviceMemory?: number;
+};
+const connection = navWithHints.connection || navWithHints.mozConnection || navWithHints.webkitConnection;
+const lowPowerDevice =
+  prefersReducedMotion ||
+  Boolean(connection?.saveData) ||
+  (coarsePointer &&
+    (/Android/i.test(navigator.userAgent) ||
+      Boolean(navWithHints.deviceMemory && navWithHints.deviceMemory <= 4) ||
+      navigator.hardwareConcurrency <= 4));
+const canAnimate = !lowPowerDevice && !coarsePointer;
+
+document.documentElement.classList.toggle('low-power', lowPowerDevice);
+
+if (lowPowerDevice) {
+  backgroundVideos.forEach((video) => {
+    video.pause();
+    video.removeAttribute('autoplay');
+    video.preload = 'none';
+  });
+}
 
 const setHeaderState = () => {
   header?.classList.toggle('scrolled', window.scrollY > 12);

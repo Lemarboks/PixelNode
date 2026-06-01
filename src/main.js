@@ -23,10 +23,20 @@ const revealItems = Array.from(
 const tiltCards = Array.from(document.querySelectorAll('.tilt-card'));
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
-const canAnimate = !prefersReducedMotion && !coarsePointer;
 const backgroundVideos = Array.from(document.querySelectorAll('.hero-background video'));
+const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+const lowPowerDevice =
+  prefersReducedMotion ||
+  Boolean(connection?.saveData) ||
+  (coarsePointer &&
+    (/Android/i.test(navigator.userAgent) ||
+      (navigator.deviceMemory && navigator.deviceMemory <= 4) ||
+      navigator.hardwareConcurrency <= 4));
+const canAnimate = !lowPowerDevice && !coarsePointer;
 
-if (prefersReducedMotion) {
+document.documentElement.classList.toggle('low-power', lowPowerDevice);
+
+if (lowPowerDevice) {
   backgroundVideos.forEach((video) => {
     video.pause();
     video.removeAttribute('autoplay');

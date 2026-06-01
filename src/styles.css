@@ -2127,6 +2127,93 @@ meter {
   transform: translateY(0) scale(1);
 }
 
+html:not(.low-power) .button,
+html:not(.low-power) .header-cta,
+html:not(.low-power) .service-card,
+html:not(.low-power) .layout-card,
+html:not(.low-power) .frame-card,
+html:not(.low-power) .about-hud,
+html:not(.low-power) .about-image-panel,
+html:not(.low-power) .services-visual-panel,
+html:not(.low-power) .work-stats-grid div,
+html:not(.low-power) .contact-emails a {
+  transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+html:not(.low-power) .service-card,
+html:not(.low-power) .layout-card,
+html:not(.low-power) .frame-card,
+html:not(.low-power) .about-hud,
+html:not(.low-power) .about-image-panel,
+html:not(.low-power) .services-visual-panel,
+html:not(.low-power) .work-stats-grid div {
+  will-change: transform;
+}
+
+html.low-power body::before,
+html.low-power body::after,
+html.low-power .cursor-glow,
+html.low-power .ambient-field {
+  display: none;
+}
+
+html.low-power .hero-background video {
+  display: none;
+}
+
+html.low-power .hero-background img {
+  opacity: 1;
+}
+
+html.low-power .hero-background img,
+html.low-power .home-video-hero .hero-background img,
+html.low-power .services-visual-panel img,
+html.low-power .about-image-panel img,
+html.low-power .layout-preview img,
+html.low-power .frame-visual img {
+  filter: none;
+}
+
+html.low-power .site-header.scrolled,
+html.low-power .main-nav,
+html.low-power .service-card,
+html.low-power .work-card,
+html.low-power .about-panel,
+html.low-power .contact-form,
+html.low-power .stats-grid div,
+html.low-power .metric-grid div,
+html.low-power .ops-card,
+html.low-power .control-card,
+html.low-power .deployment-card,
+html.low-power .frame-card,
+html.low-power .log-panel,
+html.low-power .heatmap,
+html.low-power .about-hud,
+html.low-power .about-signal,
+html.low-power .about-value,
+html.low-power .liquid-button.button-secondary {
+  backdrop-filter: none;
+}
+
+html.low-power *,
+html.low-power *::before,
+html.low-power *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 140ms !important;
+  will-change: auto !important;
+}
+
+html.low-power .tilt-card,
+html.low-power .button:hover,
+html.low-power .header-cta:hover,
+html.low-power .services-visual-panel:hover img,
+html.low-power .about-image-panel:hover img,
+html.low-power .layout-card:hover .layout-preview img,
+html.low-power .frame-card:hover .frame-visual img {
+  transform: none;
+}
+
 .hero-copy > .reveal:nth-child(2) {
   transition-delay: 90ms;
 }
