@@ -2688,6 +2688,159 @@ meter {
   }
 }
 
+@media (max-width: 680px) {
+  body {
+    font-size: 16px;
+  }
+
+  .site-shell {
+    overflow: visible;
+  }
+
+  .site-header {
+    top: 0;
+    padding: 22px 0;
+  }
+
+  .site-header.scrolled {
+    top: 10px;
+    padding: 10px 14px;
+  }
+
+  .section {
+    padding: 96px 20px;
+  }
+
+  .page-hero,
+  .page-contact {
+    padding-top: 150px;
+  }
+
+  .page-hero {
+    gap: 22px;
+  }
+
+  .page-hero p:last-child,
+  .contact-copy p,
+  .hero-body {
+    line-height: 1.56;
+  }
+
+  .page-hero h1,
+  .contact-copy h1,
+  .contact-copy h2,
+  .section-heading h2,
+  .page-cta h2 {
+    font-size: clamp(2.35rem, 11vw, 3.7rem);
+    line-height: 0.98;
+  }
+
+  .home-video-hero {
+    place-items: end center;
+    padding: 118px 20px 44px;
+  }
+
+  .hero-center-copy {
+    width: min(100%, 520px);
+  }
+
+  .hero-center-copy .hero-line {
+    max-width: 24rem;
+    margin: 24px auto 0;
+    font-size: clamp(1.08rem, 5.2vw, 1.42rem);
+    line-height: 1.22;
+  }
+
+  .hero-center-copy .hero-actions {
+    grid-template-columns: 1fr;
+    width: min(100%, 360px);
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .hero-center-copy .button {
+    min-height: 54px;
+    padding: 0 18px;
+    font-size: 0.94rem;
+  }
+
+  .service-strip,
+  .layout-showcase,
+  .media-stream,
+  .metric-grid,
+  .ops-grid,
+  .control-grid,
+  .deployment-grid {
+    gap: 20px;
+    padding-inline: 20px;
+  }
+
+  .service-card,
+  .layout-card > div:last-child,
+  .frame-meta,
+  .about-hud-primary,
+  .about-hud-secondary,
+  .about-signal,
+  .about-value,
+  .contact-form {
+    padding: 26px;
+  }
+
+  .layout-preview {
+    min-height: 240px;
+  }
+
+  .frame-visual {
+    min-height: 220px;
+  }
+
+  .about-video-stage {
+    gap: 20px;
+    padding-top: 150px;
+  }
+
+  .about-signal-stack,
+  .about-value-stack {
+    gap: 16px;
+  }
+
+  .about-hud h1 {
+    font-size: clamp(2.05rem, 11vw, 3.15rem);
+    line-height: 0.98;
+  }
+
+  .about-hud h2 {
+    line-height: 1.06;
+  }
+
+  .contact-section {
+    gap: 34px;
+  }
+
+  .contact-points {
+    gap: 10px;
+  }
+
+  .contact-points span {
+    padding: 10px 14px;
+  }
+
+  .contact-emails {
+    gap: 10px;
+    margin-top: 28px;
+  }
+
+  .contact-emails a {
+    padding: 14px 15px;
+    font-size: 0.92rem;
+  }
+
+  .site-footer {
+    gap: 16px;
+    padding: 34px 20px 42px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
