@@ -681,6 +681,52 @@ textarea {
   padding: 0 clamp(24px, 5vw, 84px) 96px;
 }
 
+.services-visual-section {
+  padding-top: 0;
+  padding-bottom: 64px;
+}
+
+.services-visual-panel,
+.about-image-panel {
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(320px, 42vw, 560px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+    rgba(5, 5, 5, 0.72);
+  box-shadow: var(--shadow);
+}
+
+.services-visual-panel::after,
+.about-image-panel::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.04), transparent 48%, rgba(0, 0, 0, 0.3)),
+    linear-gradient(120deg, rgba(255, 255, 255, 0.12), transparent 34%);
+  pointer-events: none;
+}
+
+.services-visual-panel img,
+.about-image-panel img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 620ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 620ms ease;
+}
+
+.services-visual-panel:hover img,
+.about-image-panel:hover img {
+  filter: saturate(1.06) contrast(1.04);
+  transform: scale(1.045);
+}
+
 .service-card,
 .work-card,
 .about-panel,
@@ -1375,6 +1421,81 @@ meter {
   padding: 22px;
 }
 
+.work-stats-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.35fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: end;
+  padding-top: 26px;
+}
+
+.work-stats-heading {
+  max-width: 620px;
+}
+
+.work-stats-heading h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.8vw, 5.6rem);
+  line-height: 0.94;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.work-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.work-stats-grid div {
+  position: relative;
+  overflow: hidden;
+  min-height: 156px;
+  padding: clamp(24px, 3vw, 36px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)),
+    rgba(5, 5, 5, 0.72);
+  box-shadow: var(--shadow);
+}
+
+.work-stats-grid div::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.16), transparent 30%),
+    linear-gradient(120deg, rgba(255, 255, 255, 0.08), transparent 38%);
+  pointer-events: none;
+}
+
+.work-stats-grid strong,
+.work-stats-grid span {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+.work-stats-grid strong {
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 4.8rem);
+  line-height: 0.9;
+  font-weight: 800;
+}
+
+.work-stats-grid span {
+  margin-top: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
 .terminal-panel {
   position: fixed;
   right: 24px;
@@ -1765,6 +1886,12 @@ meter {
   grid-column: 1;
   width: 100%;
   padding: clamp(34px, 5vw, 70px);
+}
+
+.about-image-panel {
+  grid-column: 2;
+  grid-row: 1;
+  min-height: clamp(340px, 38vw, 520px);
 }
 
 .about-hud-secondary {
@@ -2329,6 +2456,12 @@ meter {
     grid-column: 1;
   }
 
+  .about-image-panel {
+    grid-column: 1;
+    grid-row: auto;
+    min-height: 420px;
+  }
+
   .about-signal-stack,
   .about-value-stack {
     grid-column: 1;
@@ -2768,11 +2901,21 @@ meter {
   .layout-showcase,
   .media-stream,
   .metric-grid,
+  .work-stats-grid,
   .ops-grid,
   .control-grid,
   .deployment-grid {
     gap: 20px;
     padding-inline: 20px;
+  }
+
+  .services-visual-section {
+    padding: 0 20px 54px;
+  }
+
+  .services-visual-panel,
+  .about-image-panel {
+    min-height: 260px;
   }
 
   .service-card,
@@ -2797,6 +2940,11 @@ meter {
   .about-video-stage {
     gap: 20px;
     padding-top: 150px;
+  }
+
+  .about-image-panel {
+    grid-column: 1;
+    grid-row: auto;
   }
 
   .about-signal-stack,
@@ -2833,6 +2981,26 @@ meter {
   .contact-emails a {
     padding: 14px 15px;
     font-size: 0.92rem;
+  }
+
+  .work-stats-section {
+    grid-template-columns: 1fr;
+    gap: 26px;
+    padding-top: 40px;
+  }
+
+  .work-stats-heading h2 {
+    font-size: clamp(2.1rem, 10vw, 3.35rem);
+    line-height: 1;
+  }
+
+  .work-stats-grid {
+    grid-template-columns: 1fr;
+    padding-inline: 0;
+  }
+
+  .work-stats-grid div {
+    min-height: 132px;
   }
 
   .site-footer {
