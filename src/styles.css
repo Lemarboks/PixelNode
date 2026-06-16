@@ -2907,6 +2907,29 @@ html.low-power .hero-center-copy > * {
   min-height: 24px;
   margin: 0;
   color: var(--green);
+  transition: color 0.2s ease;
+}
+
+.form-status[data-state='sending'] {
+  color: var(--muted, #9aa);
+}
+
+.form-status[data-state='error'] {
+  color: #ff6b6b;
+}
+
+.form-status[data-state='success'] {
+  color: var(--green);
+}
+
+/* Honeypot — visually hidden but still focusable/fillable by bots.
+   Not display:none, which some bots skip. */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .site-footer {

@@ -5,3 +5,6 @@ dist/
 *.log
 playwright-report/
 test-results/
+
+# Build output (Vercel rebuilds from source)
+docs/

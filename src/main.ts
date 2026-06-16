@@ -163,7 +163,23 @@ if (canAnimate) {
   revealItems.forEach((item) => item.classList.add('visible'));
 }
 
-contactForm?.addEventListener('submit', (event) => {
+const CONTACT_EMAIL = 'pixelnode.studios@gmail.com';
+
+const setFormStatus = (text: string, state: 'idle' | 'sending' | 'success' | 'error') => {
+  if (!formStatus) return;
+  formStatus.textContent = text;
+  formStatus.dataset.state = state;
+};
+
+const mailtoFallback = (fields: Record<string, string>) => {
+  const subject = encodeURIComponent(`PixelNode project inquiry from ${fields.name}`);
+  const body = encodeURIComponent(
+    `Name: ${fields.name}\nEmail: ${fields.email}\nProject type: ${fields.project}\n\nProject details:\n${fields.message}`
+  );
+  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+};
+
+contactForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
 
   if (!contactForm.checkValidity()) {
@@ -172,22 +188,44 @@ contactForm?.addEventListener('submit', (event) => {
   }
 
   const data = new FormData(contactForm);
-  const name = String(data.get('name') ?? '').trim();
-  const email = String(data.get('email') ?? '').trim();
-  const project = String(data.get('project') ?? '').trim();
-  const message = String(data.get('message') ?? '').trim();
+  const fields = {
+    name: String(data.get('name') ?? '').trim(),
+    email: String(data.get('email') ?? '').trim(),
+    project: String(data.get('project') ?? '').trim(),
+    message: String(data.get('message') ?? '').trim(),
+    company: String(data.get('company') ?? '') // honeypot
+  };
 
-  const subject = encodeURIComponent(`PixelNode project inquiry from ${name}`);
-  const body = encodeURIComponent(
-    `Name: ${name}\nEmail: ${email}\nProject type: ${project}\n\nProject details:\n${message}`
-  );
+  const submitButton = contactForm.querySelector<HTMLButtonElement>('button[type="submit"]');
+  if (submitButton) submitButton.disabled = true;
+  setFormStatus('Sending your project details…', 'sending');
 
-  if (formStatus) {
-    formStatus.textContent = 'Opening your email app with the project details ready to send.';
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(fields)
+    });
+
+    const result = (await response.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+
+    if (response.ok && result.ok) {
+      setFormStatus('Thanks — your message is in. We will reply shortly.', 'success');
+      contactForm.reset();
+    } else {
+      setFormStatus(
+        result.error || 'Something went wrong. Opening your email app as a backup…',
+        'error'
+      );
+      if (response.status >= 500 || !result.error) mailtoFallback(fields);
+    }
+  } catch {
+    // Network/API unreachable — never lose the lead, fall back to mailto.
+    setFormStatus('Network issue — opening your email app with the details ready to send.', 'error');
+    mailtoFallback(fields);
+  } finally {
+    if (submitButton) submitButton.disabled = false;
   }
-
-  window.location.href = `mailto:pixelnode.studios@gmail.com?subject=${subject}&body=${body}`;
-  contactForm.reset();
 });
 
 setHeaderState();

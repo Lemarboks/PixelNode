@@ -25,6 +25,7 @@
             <label>Email <input type="email" name="email" autocomplete="email" required /></label>
             <label>Project Type <select name="project" required><option value="">Choose one</option><option>New website</option><option>Website redesign</option><option>Hosting and domain setup</option><option>Homelab / server setup</option><option>Photography / media</option><option>Maintenance plan</option></select></label>
             <label>Project Details <textarea name="message" rows="5" placeholder="What do you need built, fixed, hosted, or captured?" required></textarea></label>
+            <div class="hp-field" aria-hidden="true"><label>Company <input type="text" name="company" tabindex="-1" autocomplete="off" /></label></div>
             <button class="button button-primary" type="submit">Start Project <span aria-hidden="true">-&gt;</span></button>
             <p class="form-status" role="status" data-form-status></p>
           </form>
@@ -32,6 +33,6 @@
       </main>
       <footer class="site-footer"><a class="brand compact" href="index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span class="brand-text">PixelNode</span></a><p>Web design, hosting, homelabs, and media.</p><a href="mailto:pixelnode.studios@gmail.com">pixelnode.studios@gmail.com</a></footer>
     </div>
-    <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/main.ts"></script>
   </body>
 </html>
