@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
 import { getSupabase } from '../../lib/supabase.js';
-import { checkRateLimit } from '../../lib/rateLimit.js';
+import { consumeRateLimit } from '../../lib/rateLimit.js';
 import { createSession, sessionCookie, passwordMatches } from '../../lib/auth.js';
 
 const LoginSchema = z.object({
@@ -26,16 +26,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ ok: false, error: 'Password required' });
   }
 
-  // Rate-limit login attempts per IP to slow brute force (reuses the lead limiter).
+  // Rate-limit login attempts per IP to slow brute force. This endpoint fails
+  // CLOSED: if the limiter store can't be consulted we reject the attempt rather
+  // than allow unlimited guesses. (The contact form fails open; auth must not.)
   const ip = `login:${getClientIp(req)}`;
+  let db;
   try {
-    const db = getSupabase();
-    const allowed = await checkRateLimit(db, ip);
-    if (!allowed) {
-      return res.status(429).json({ ok: false, error: 'Too many attempts. Try again later.' });
-    }
+    db = getSupabase();
   } catch {
-    // If the limiter store is unavailable, continue — password check still guards.
+    return res.status(503).json({ ok: false, error: 'Login temporarily unavailable. Try again later.' });
+  }
+
+  const limit = await consumeRateLimit(db, ip);
+  if (limit.degraded) {
+    return res.status(503).json({ ok: false, error: 'Login temporarily unavailable. Try again later.' });
+  }
+  if (!limit.allowed) {
+    return res.status(429).json({ ok: false, error: 'Too many attempts. Try again later.' });
   }
 
   if (!passwordMatches(parsed.data.password)) {

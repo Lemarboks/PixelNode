@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
 import { getSupabase } from '../lib/supabase.js';
-import { checkRateLimit } from '../lib/rateLimit.js';
+import { consumeRateLimit } from '../lib/rateLimit.js';
 import { sendLeadEmails } from '../lib/email.js';
 
 // Payload contract — kept in sync with the contact form fields.
@@ -44,7 +44,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const ip = getClientIp(req);
   const userAgent = (req.headers['user-agent'] as string) || null;
 
-  // 3. Rate limit (fails open on store errors).
+  // 3. Rate limit. The contact form fails OPEN on a limiter outage — we would
+  //    rather risk extra submissions than silently drop a genuine lead.
   let db;
   try {
     db = getSupabase();
@@ -52,8 +53,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(500).json({ ok: false, error: 'Server is not configured. Please email us directly.' });
   }
 
-  const allowed = await checkRateLimit(db, ip);
-  if (!allowed) {
+  const limit = await consumeRateLimit(db, ip);
+  if (!limit.allowed) {
     return res.status(429).json({ ok: false, error: 'Too many submissions. Please try again later.' });
   }
 

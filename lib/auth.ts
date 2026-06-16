@@ -1,4 +1,5 @@
 import { SignJWT, jwtVerify } from 'jose';
+import { createHash, timingSafeEqual } from 'node:crypto';
 import type { VercelRequest } from '@vercel/node';
 
 const COOKIE_NAME = 'pxn_admin';
@@ -58,17 +59,15 @@ export async function isAuthenticated(req: VercelRequest): Promise<boolean> {
 }
 
 /**
- * Constant-time-ish password comparison. Not perfectly constant-time in JS,
- * but avoids the trivial early-exit of === on length mismatch for short admin
- * passwords. The login route is also rate-limited.
+ * Constant-time password comparison. Both inputs are SHA-256 hashed first so
+ * the compared buffers are always 32 bytes — this removes the length-leak of a
+ * raw length check and lets timingSafeEqual run without throwing on mismatched
+ * lengths. The login route is also rate-limited.
  */
 export function passwordMatches(input: string): boolean {
   const expected = process.env.ADMIN_PASSWORD || '';
   if (expected.length === 0) return false;
-  if (input.length !== expected.length) return false;
-  let diff = 0;
-  for (let i = 0; i < expected.length; i++) {
-    diff |= input.charCodeAt(i) ^ expected.charCodeAt(i);
-  }
-  return diff === 0;
+  const a = new Uint8Array(createHash('sha256').update(input).digest());
+  const b = new Uint8Array(createHash('sha256').update(expected).digest());
+  return timingSafeEqual(a, b);
 }

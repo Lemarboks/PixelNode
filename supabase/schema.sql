@@ -13,11 +13,15 @@ create table if not exists public.leads (
   message     text not null,
   status      text not null default 'new'
               check (status in ('new', 'contacted', 'won', 'lost')),
+  notes       text not null default '',
   ip          text,
   user_agent  text,
   created_at  timestamptz not null default now(),
   updated_at  timestamptz not null default now()
 );
+
+-- Backfill for databases created before `notes` existed (idempotent).
+alter table public.leads add column if not exists notes text not null default '';
 
 create index if not exists leads_created_at_idx on public.leads (created_at desc);
 create index if not exists leads_status_idx      on public.leads (status);
@@ -35,6 +39,26 @@ create table if not exists public.rate_limits (
 );
 
 create index if not exists rate_limits_window_idx on public.rate_limits (window_start);
+
+-- ---------------------------------------------------------------------------
+-- increment_rate_limit: atomically bump (or create) the counter for an IP in a
+-- window and return the NEW count. Using a single INSERT ... ON CONFLICT DO
+-- UPDATE makes the read-and-increment race-free, unlike a separate select+upsert
+-- which lets concurrent requests all read the same value and bypass the cap.
+-- ---------------------------------------------------------------------------
+create or replace function public.increment_rate_limit(p_ip text, p_window timestamptz)
+returns integer as $$
+declare
+  new_count integer;
+begin
+  insert into public.rate_limits (ip, window_start, count)
+  values (p_ip, p_window, 1)
+  on conflict (ip, window_start)
+  do update set count = public.rate_limits.count + 1
+  returning count into new_count;
+  return new_count;
+end;
+$$ language plpgsql;
 
 -- ---------------------------------------------------------------------------
 -- Row Level Security
