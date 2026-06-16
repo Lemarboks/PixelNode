@@ -7,6 +7,9 @@ test('founder page renders all sections', async ({ page }) => {
   const ld = await page.locator('script[type="application/ld+json"]').textContent();
   expect(ld).toContain('"Person"');
   expect(ld).toContain('Lemar Boks');
+  expect(ld).toContain('Raymond Mandongwe');
+  // Two co-founder portraits.
+  await expect(page.locator('.founder-portrait')).toHaveCount(2);
   // Sections render.
   await expect(page.locator('.expertise-card')).toHaveCount(6);
   // Featured-projects section removed; ensure it's gone.
