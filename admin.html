@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Admin | PixelNode</title>
+    <style>
+      :root {
+        --bg: #040404;
+        --bg-soft: #0b0b0b;
+        --panel: rgba(15, 15, 15, 0.92);
+        --line: rgba(255, 255, 255, 0.16);
+        --text: #f7f7f7;
+        --muted: #b8b8b8;
+        --dim: #858585;
+        --font: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font);
+        -webkit-font-smoothing: antialiased;
+      }
+      a { color: inherit; }
+      .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 20px 80px; }
+      .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+      .brand { font-weight: 700; letter-spacing: 0.04em; }
+      .brand span { color: var(--dim); }
+      .btn {
+        font: inherit; cursor: pointer; border: 1px solid var(--line);
+        background: var(--bg-soft); color: var(--text);
+        padding: 9px 16px; border-radius: 10px; transition: border-color 0.15s, background 0.15s;
+      }
+      .btn:hover { border-color: rgba(255,255,255,0.4); }
+      .btn:disabled { opacity: 0.5; cursor: default; }
+
+      /* Login */
+      .login { max-width: 360px; margin: 12vh auto 0; text-align: center; }
+      .login h1 { font-size: 1.4rem; margin-bottom: 6px; }
+      .login p { color: var(--muted); margin-top: 0; margin-bottom: 22px; }
+      .login input {
+        width: 100%; font: inherit; padding: 12px 14px; border-radius: 10px;
+        border: 1px solid var(--line); background: var(--bg-soft); color: var(--text);
+        margin-bottom: 12px;
+      }
+      .login .btn { width: 100%; }
+      .err { color: #ff6b6b; min-height: 20px; font-size: 0.9rem; margin-top: 6px; }
+
+      /* Stats */
+      .stats { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+      .stat {
+        flex: 1; min-width: 110px; background: var(--panel); border: 1px solid var(--line);
+        border-radius: 12px; padding: 14px 16px;
+      }
+      .stat strong { display: block; font-size: 1.6rem; }
+      .stat span { color: var(--dim); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+      /* Leads */
+      .lead {
+        background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+        padding: 18px; margin-bottom: 14px;
+      }
+      .lead-head { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+      .lead-head h3 { margin: 0 0 2px; font-size: 1.05rem; }
+      .lead-head a { color: var(--muted); text-decoration: none; font-size: 0.9rem; }
+      .lead-head a:hover { text-decoration: underline; }
+      .meta { color: var(--dim); font-size: 0.8rem; margin-top: 4px; }
+      .project { color: var(--muted); font-size: 0.85rem; }
+      .message { white-space: pre-wrap; color: var(--text); margin: 12px 0; line-height: 1.5; font-size: 0.95rem; }
+      .controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 10px; }
+      select, textarea {
+        font: inherit; background: var(--bg-soft); color: var(--text);
+        border: 1px solid var(--line); border-radius: 9px; padding: 8px 10px;
+      }
+      textarea { width: 100%; resize: vertical; min-height: 52px; margin-top: 10px; }
+      .badge { padding: 3px 10px; border-radius: 999px; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--line); }
+      .badge.new { color: #7dd3fc; border-color: rgba(125,211,252,0.4); }
+      .badge.contacted { color: #fcd34d; border-color: rgba(252,211,77,0.4); }
+      .badge.won { color: #86efac; border-color: rgba(134,239,172,0.4); }
+      .badge.lost { color: #fca5a5; border-color: rgba(252,165,165,0.4); }
+      .save-note { font-size: 0.85rem; padding: 6px 12px; }
+      .empty, .loading { color: var(--muted); text-align: center; padding: 40px; }
+      .saved-flash { color: #86efac; font-size: 0.8rem; margin-left: 8px; }
+    </style>
+  </head>
+  <body>
+    <!-- Login view -->
+    <section class="login" data-login hidden>
+      <h1>PixelNode Admin</h1>
+      <p>Enter your password to view leads.</p>
+      <form data-login-form>
+        <input type="password" name="password" placeholder="Password" autocomplete="current-password" required />
+        <button class="btn" type="submit">Sign in</button>
+        <p class="err" data-login-err></p>
+      </form>
+    </section>
+
+    <!-- Dashboard view -->
+    <div class="wrap" data-dash hidden>
+      <div class="topbar">
+        <div class="brand">PIXEL<span>NODE</span> · Leads</div>
+        <div>
+          <button class="btn" data-refresh>Refresh</button>
+          <button class="btn" data-logout>Log out</button>
+        </div>
+      </div>
+      <div class="stats" data-stats></div>
+      <div data-leads><p class="loading">Loading leads…</p></div>
+    </div>
+
+    <script type="module" src="./src/admin.ts"></script>
+  </body>
+</html>

@@ -11,7 +11,8 @@ export default defineConfig({
         services: resolve(__dirname, 'services.html'),
         work: resolve(__dirname, 'work.html'),
         about: resolve(__dirname, 'about.html'),
-        contact: resolve(__dirname, 'contact.html')
+        contact: resolve(__dirname, 'contact.html'),
+        admin: resolve(__dirname, 'admin.html')
       }
     }
   }
