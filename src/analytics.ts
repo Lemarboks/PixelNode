@@ -2,7 +2,7 @@
 // GA only loads after the visitor explicitly accepts. Declining stores the
 // choice and loads nothing — true opt-in consent (POPIA-friendly).
 
-const GA_MEASUREMENT_ID = 'G-2J5WXSRRCF';
+const GA_MEASUREMENT_ID = 'G-FT1E6S2FP7';
 const CONSENT_KEY = 'pxn_cookie_consent'; // 'accepted' | 'declined'
 
 declare global {
