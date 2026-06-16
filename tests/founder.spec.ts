@@ -9,7 +9,8 @@ test('founder page renders all sections', async ({ page }) => {
   expect(ld).toContain('Lemar Boks');
   // Sections render.
   await expect(page.locator('.expertise-card')).toHaveCount(6);
-  await expect(page.locator('.founder-project')).toHaveCount(4);
+  // Featured-projects section removed; ensure it's gone.
+  await expect(page.locator('.founder-project')).toHaveCount(0);
   await expect(page.locator('.timeline-item')).toHaveCount(4);
   await expect(page.locator('.connect-link')).toHaveCount(4);
   // A reveal element shows on scroll.
