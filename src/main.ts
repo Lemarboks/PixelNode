@@ -163,7 +163,7 @@ if (canAnimate) {
   revealItems.forEach((item) => item.classList.add('visible'));
 }
 
-const CONTACT_EMAIL = 'pixelnode.studios@gmail.com';
+const CONTACT_EMAIL = 'pixelnode.studio@gmail.com';
 
 const setFormStatus = (text: string, state: 'idle' | 'sending' | 'success' | 'error') => {
   if (!formStatus) return;
