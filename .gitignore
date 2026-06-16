@@ -8,3 +8,4 @@ test-results/
 
 # Build output (Vercel rebuilds from source)
 docs/
+resend-dns.zone
