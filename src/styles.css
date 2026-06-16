@@ -3857,3 +3857,146 @@ html.low-power .status-dot { animation: none; }
   .status-grid { grid-template-columns: repeat(2, 1fr); }
   .testimonials-grid { grid-template-columns: 1fr; }
 }
+
+/* ==================================================================
+   FOUNDER PAGE — premium "Meet the Founder"
+   ================================================================== */
+.glass-panel {
+  background: linear-gradient(135deg, rgba(22,22,22,0.72), rgba(12,12,12,0.72));
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 18px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* 1. Hero */
+.founder-hero { padding-top: 40px; }
+.founder-hero-grid {
+  display: grid; grid-template-columns: 1.3fr 0.9fr; gap: 40px; align-items: center;
+}
+.founder-hero-copy h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.05; margin: 10px 0 18px; }
+.founder-lead { color: var(--muted, #b8b8b8); font-size: 1.05rem; line-height: 1.6; max-width: 56ch; margin-bottom: 26px; }
+.founder-portrait { padding: 18px; display: flex; flex-direction: column; gap: 16px; }
+.portrait-placeholder {
+  aspect-ratio: 4 / 5; border-radius: 12px; display: grid; place-items: center;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255,255,255,0.08), transparent 60%),
+    linear-gradient(160deg, #1a1a1a, #050505);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.portrait-placeholder span {
+  font-size: 3.5rem; font-weight: 700; letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.22); font-family: var(--font-display);
+}
+.founder-portrait figcaption { display: flex; flex-direction: column; gap: 2px; padding: 0 4px 4px; }
+.founder-portrait figcaption strong { font-size: 1.05rem; }
+.founder-portrait figcaption span { color: var(--dim, #858585); font-size: 0.85rem; }
+
+/* 2. Story + timeline */
+.founder-story { display: flex; flex-direction: column; gap: 30px; }
+.story-body { padding: 30px; display: flex; flex-direction: column; gap: 16px; }
+.story-body p { margin: 0; line-height: 1.7; color: var(--text, #f7f7f7); }
+.timeline { list-style: none; margin: 0; padding: 0; position: relative; display: flex; flex-direction: column; gap: 22px; }
+.timeline::before {
+  content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 1px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.35), rgba(255,255,255,0.05));
+}
+.timeline-item { display: grid; grid-template-columns: 24px 1fr; gap: 14px; align-items: start; }
+.timeline-dot {
+  width: 15px; height: 15px; border-radius: 50%; margin-top: 4px;
+  background: #fff; box-shadow: 0 0 0 4px rgba(255,255,255,0.08); z-index: 1;
+}
+.timeline-item strong { display: block; margin-bottom: 4px; }
+.timeline-item p { margin: 0; color: var(--muted, #b8b8b8); line-height: 1.55; font-size: 0.94rem; }
+
+/* 3. Expertise */
+.founder-expertise { display: flex; flex-direction: column; gap: 26px; }
+.expertise-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.expertise-card {
+  padding: 24px; transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.expertise-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.32);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+.expertise-icon {
+  width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
+  font-size: 1.2rem; margin-bottom: 14px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+}
+.expertise-card h3 { margin: 0 0 8px; font-size: 1.1rem; }
+.expertise-card p { margin: 0; color: var(--muted, #b8b8b8); line-height: 1.55; font-size: 0.92rem; }
+
+/* 4. Achievements */
+.founder-experience { display: flex; flex-direction: column; gap: 26px; }
+.achievement-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.achievement { padding: 22px; display: flex; flex-direction: column; gap: 6px; }
+.achievement strong { font-size: 1.05rem; }
+.achievement span { color: var(--muted, #b8b8b8); line-height: 1.55; font-size: 0.92rem; }
+
+/* 5. Featured projects */
+.founder-projects { display: flex; flex-direction: column; gap: 26px; }
+.founder-project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.founder-project { overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.founder-project:hover { transform: translateY(-5px); box-shadow: 0 26px 60px rgba(0,0,0,0.55); }
+.fp-image {
+  aspect-ratio: 16 / 8; display: grid; place-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.fp-image span { font-size: 1.6rem; font-weight: 700; color: rgba(255,255,255,0.28); letter-spacing: 0.04em; }
+.fp-pixelnode { background: linear-gradient(135deg, #1f1f1f, #050505); }
+.fp-bhs { background: linear-gradient(135deg, #15233a, #050505); }
+.fp-brand { background: linear-gradient(135deg, #2a1530, #050505); }
+.fp-infra { background: linear-gradient(135deg, #0f2a22, #050505); }
+.fp-body { padding: 22px; }
+.fp-body h3 { margin: 0 0 8px; font-size: 1.15rem; }
+.fp-body p { margin: 0 0 14px; color: var(--muted, #b8b8b8); line-height: 1.55; font-size: 0.92rem; }
+.fp-tech { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.fp-tech span {
+  font-size: 0.72rem; padding: 4px 10px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14); color: var(--muted, #b8b8b8);
+}
+
+/* 6. Articles */
+.founder-articles { display: flex; flex-direction: column; gap: 20px; }
+.articles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.article-card { padding: 22px; transition: transform 0.25s ease, border-color 0.25s ease; }
+.article-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.3); }
+.article-tag {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--dim, #858585); padding: 3px 10px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14); display: inline-block; margin-bottom: 12px;
+}
+.article-card h3 { margin: 0 0 12px; font-size: 1.02rem; line-height: 1.4; }
+.article-by { margin: 0; color: var(--dim, #858585); font-size: 0.8rem; }
+.articles-note { color: var(--dim, #858585); font-size: 0.85rem; text-align: center; margin: 0; }
+
+/* 7. Connect */
+.founder-connect { display: flex; flex-direction: column; gap: 24px; }
+.connect-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.connect-link {
+  padding: 22px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: inherit;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.connect-link:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.34); }
+.connect-icon {
+  width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;
+}
+.connect-link strong { font-size: 0.98rem; }
+.connect-link > span:not(.connect-icon) { color: var(--dim, #858585); font-size: 0.82rem; }
+
+@media (max-width: 900px) {
+  .founder-hero-grid { grid-template-columns: 1fr; }
+  .expertise-grid, .articles-grid { grid-template-columns: 1fr; }
+  .achievement-grid, .founder-project-grid, .connect-grid { grid-template-columns: 1fr; }
+}
+@media (min-width: 561px) and (max-width: 900px) {
+  .expertise-grid, .articles-grid, .connect-grid { grid-template-columns: repeat(2, 1fr); }
+}
+html.low-power .expertise-card:hover,
+html.low-power .founder-project:hover,
+html.low-power .article-card:hover,
+html.low-power .connect-link:hover { transform: none; }

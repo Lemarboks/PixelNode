@@ -12,6 +12,7 @@ export default defineConfig({
         work: resolve(__dirname, 'work.html'),
         about: resolve(__dirname, 'about.html'),
         contact: resolve(__dirname, 'contact.html'),
+        founder: resolve(__dirname, 'founder.html'),
         admin: resolve(__dirname, 'admin.html')
       }
     }
