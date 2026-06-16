@@ -3684,3 +3684,81 @@ html.low-power .hero-center-copy > * {
   .cookie-banner { flex-direction: column; align-items: stretch; }
   .cookie-actions { justify-content: flex-end; }
 }
+
+/* ---- Quote calculator (Services page) ---- */
+.quote-section { display: flex; flex-direction: column; gap: 28px; }
+.quote-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.quote-col h3 {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted, #b8b8b8);
+  margin: 22px 0 12px;
+}
+.quote-col h3:first-child { margin-top: 0; }
+.quote-options { display: grid; gap: 10px; }
+.quote-opt {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "label price" "note price";
+  gap: 2px 12px;
+  align-items: center;
+  padding: 14px 16px;
+  border: 1px solid var(--line, rgba(255,255,255,0.16));
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  background: var(--panel, rgba(15,15,15,0.76));
+}
+.quote-opt:hover { border-color: rgba(255,255,255,0.4); }
+.quote-opt.selected { border-color: var(--text, #f7f7f7); background: rgba(255,255,255,0.06); }
+.quote-opt input { position: absolute; opacity: 0; pointer-events: none; }
+.quote-opt-label { grid-area: label; font-weight: 600; }
+.quote-opt-note { grid-area: note; font-size: 0.8rem; color: var(--dim, #858585); }
+.quote-opt-price { grid-area: price; color: var(--muted, #b8b8b8); font-size: 0.88rem; white-space: nowrap; }
+.quote-check { grid-template-areas: "label price"; }
+
+.quote-extra-pages {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 12px 16px; border: 1px solid var(--line, rgba(255,255,255,0.16));
+  border-radius: 12px; margin-bottom: 10px; background: var(--panel, rgba(15,15,15,0.76));
+}
+.stepper { display: flex; align-items: center; gap: 14px; }
+.stepper button {
+  width: 30px; height: 30px; border-radius: 8px; cursor: pointer;
+  border: 1px solid var(--line, rgba(255,255,255,0.16));
+  background: var(--bg-soft, #0b0b0b); color: var(--text, #f7f7f7);
+  font-size: 1.1rem; line-height: 1; display: grid; place-items: center;
+}
+.stepper button:hover { border-color: rgba(255,255,255,0.4); }
+.stepper span { min-width: 18px; text-align: center; font-weight: 600; }
+
+.quote-summary {
+  position: sticky; top: 90px;
+  border: 1px solid var(--line, rgba(255,255,255,0.16));
+  border-radius: 16px; padding: 22px;
+  background: var(--panel-strong, rgba(18,18,18,0.94));
+}
+.quote-total { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin: 8px 0 4px; }
+.quote-total strong { font-size: 2rem; line-height: 1; }
+.quote-total strong.monthly { font-size: 1.3rem; color: var(--muted, #b8b8b8); }
+.quote-total span { color: var(--dim, #858585); font-size: 0.8rem; }
+.quote-disclaimer { font-size: 0.8rem; color: var(--dim, #858585); margin: 12px 0 18px; line-height: 1.45; }
+.quote-form { display: grid; gap: 12px; }
+.quote-form label { display: grid; gap: 6px; font-size: 0.85rem; color: var(--muted, #b8b8b8); }
+.quote-form input {
+  font: inherit; padding: 11px 13px; border-radius: 10px;
+  border: 1px solid var(--line, rgba(255,255,255,0.16));
+  background: var(--bg-soft, #0b0b0b); color: var(--text, #f7f7f7);
+}
+
+@media (max-width: 820px) {
+  .quote-grid { grid-template-columns: 1fr; }
+  .quote-summary { position: static; }
+}

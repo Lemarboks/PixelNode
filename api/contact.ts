@@ -10,6 +10,8 @@ const ContactSchema = z.object({
   email: z.string().trim().email('A valid email is required').max(200),
   project: z.string().trim().min(1, 'Project type is required').max(120),
   message: z.string().trim().min(1, 'Project details are required').max(5000),
+  // Optional quote breakdown from the calculator (what the visitor configured).
+  quoteSummary: z.string().trim().max(2000).optional(),
   // Honeypot: a hidden field real users never fill. Bots usually do.
   company: z.string().optional()
 });
@@ -33,13 +35,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const first = parsed.error.issues[0]?.message ?? 'Invalid submission';
     return res.status(400).json({ ok: false, error: first });
   }
-  const { name, email, project, message, company } = parsed.data;
+  const { name, email, project, message, quoteSummary, company } = parsed.data;
 
   // 2. Honeypot — silently accept so bots don't learn they were caught,
   //    but never store or email the submission.
   if (company && company.trim().length > 0) {
     return res.status(200).json({ ok: true });
   }
+
+  // Fold the calculator's quote breakdown into the stored/emailed message so
+  // the lead record shows exactly what the visitor configured.
+  const fullMessage = quoteSummary
+    ? `${message}\n\n--- Quote estimate ---\n${quoteSummary}`
+    : message;
 
   const ip = getClientIp(req);
   const userAgent = (req.headers['user-agent'] as string) || null;
@@ -63,7 +71,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     name,
     email,
     project,
-    message,
+    message: fullMessage,
     ip,
     user_agent: userAgent
   });
@@ -74,7 +82,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   // 5. Email (best-effort; the lead is already safely stored).
   try {
-    await sendLeadEmails({ name, email, project, message });
+    await sendLeadEmails({ name, email, project, message: fullMessage });
   } catch {
     // swallow — the lead is captured; email is a convenience, not a guarantee.
   }

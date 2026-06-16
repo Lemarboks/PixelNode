@@ -1,7 +1,9 @@
 import './styles.css';
 import { initAnalytics } from './analytics';
+import { initQuoteCalculator } from './quote';
 
 initAnalytics();
+initQuoteCalculator();
 
 const header = document.querySelector<HTMLElement>('[data-header]');
 const nav = document.querySelector<HTMLElement>('[data-nav]');

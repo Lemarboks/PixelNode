@@ -60,3 +60,39 @@ test.describe('contact form', () => {
     await expect(page.locator('[data-form-status]')).toContainText('valid email');
   });
 });
+
+test.describe('quote calculator', () => {
+  test.skip(({ baseURL }) => !baseURL?.includes('127.0.0.1'), 'local build only');
+
+  test('updates total and submits with quote summary', async ({ page }) => {
+    let posted: Record<string, unknown> | null = null;
+    await page.route('**/api/contact', async (route) => {
+      posted = route.request().postDataJSON();
+      await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true }) });
+    });
+
+    await page.goto('/services.html', { waitUntil: 'domcontentloaded' });
+
+    // Default base is "business" (R6 500) — total should show it.
+    // (en-ZA formats thousands with a non-breaking space, so match digits loosely.)
+    await expect(page.locator('[data-total]')).toContainText(/R6.?500/);
+
+    // Add hosting add-on → total increases to R7 700.
+    // Inputs are visually hidden behind styled labels, so click the label.
+    await page.locator('[data-addons] input[value="hosting"]').locator('..').click();
+    await expect(page.locator('[data-total]')).toContainText(/R7.?700/);
+
+    // Pick a care plan → monthly appears.
+    await page.locator('[data-care] input[value="lite"]').locator('..').click();
+    await expect(page.locator('[data-total]')).toContainText(/R350/);
+
+    // Submit.
+    await page.fill('[data-quote-form] input[name="name"]', 'Quote Tester');
+    await page.fill('[data-quote-form] input[name="email"]', 'quote@example.com');
+    await page.click('[data-quote-form] button[type="submit"]');
+
+    await expect(page.locator('[data-quote-status]')).toHaveAttribute('data-state', 'success');
+    expect(posted).toMatchObject({ name: 'Quote Tester', email: 'quote@example.com' });
+    expect(String((posted as Record<string, unknown>).quoteSummary)).toContain('Business website');
+  });
+});
