@@ -13,7 +13,7 @@ test('homepage loads without JavaScript errors', async ({ page }) => {
     errors.push(error.message);
   });
 
-  const response = await page.goto('/PixelNode/', { waitUntil: 'domcontentloaded' });
+  const response = await page.goto('/', { waitUntil: 'domcontentloaded' });
 
   expect(response, 'homepage returned a response').not.toBeNull();
   expect(response!.status(), 'homepage HTTP status').toBeGreaterThanOrEqual(200);

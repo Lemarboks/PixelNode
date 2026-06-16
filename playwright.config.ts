@@ -8,7 +8,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: [['html', { open: 'never' }], ['list']],
   use: {
-    baseURL: process.env.PLAYWRIGHT_BASE_URL || 'https://lemarboks.github.io',
+    baseURL: process.env.PLAYWRIGHT_BASE_URL || 'https://pixelnodestudio.co.za',
     trace: 'on-first-retry'
   },
   // When PLAYWRIGHT_BASE_URL points at the local preview, Playwright starts it.
