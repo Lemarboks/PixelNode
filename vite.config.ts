@@ -13,6 +13,11 @@ export default defineConfig({
         about: resolve(__dirname, 'about.html'),
         contact: resolve(__dirname, 'contact.html'),
         founder: resolve(__dirname, 'founder.html'),
+        blog: resolve(__dirname, 'blog.html'),
+        blogCost: resolve(__dirname, 'blog-website-cost-cape-town.html'),
+        blogHomelab: resolve(__dirname, 'blog-what-is-a-homelab.html'),
+        blogMaintenance: resolve(__dirname, 'blog-website-maintenance.html'),
+        blogTimeline: resolve(__dirname, 'blog-how-long-to-build.html'),
         admin: resolve(__dirname, 'admin.html')
       }
     }

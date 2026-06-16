@@ -24,7 +24,7 @@ const labReadout = document.querySelector<HTMLElement>('[data-lab-readout]');
 const deploySim = document.querySelector<HTMLButtonElement>('[data-deploy-sim]');
 const revealItems = Array.from(
   document.querySelectorAll<HTMLElement>(
-    '.hero-copy > *, .hero-visual, .page-hero > *, .service-card, .section-heading, .work-card, .about-panel, .about-hud, .about-signal, .about-value, .case-study, .status-card, .testimonial, .story-body, .timeline-item, .expertise-card, .achievement, .founder-project, .article-card, .connect-link, .stats-grid > div, .contact-copy, .contact-form, .page-cta > *, .control-card, .ops-card, .deployment-card, .lab-console > *, .frame-card, .manifesto-strip > *, .log-panel'
+    '.hero-copy > *, .hero-visual, .page-hero > *, .service-card, .section-heading, .work-card, .about-panel, .about-hud, .about-signal, .about-value, .case-study, .status-card, .testimonial, .story-body, .timeline-item, .expertise-card, .achievement, .founder-project, .article-card, .connect-link, .blog-card, .stats-grid > div, .contact-copy, .contact-form, .page-cta > *, .control-card, .ops-card, .deployment-card, .lab-console > *, .frame-card, .manifesto-strip > *, .log-panel'
   )
 );
 const tiltCards = Array.from(document.querySelectorAll<HTMLElement>('.tilt-card'));
