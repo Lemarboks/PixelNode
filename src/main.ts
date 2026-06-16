@@ -1,4 +1,7 @@
 import './styles.css';
+import { initAnalytics } from './analytics';
+
+initAnalytics();
 
 const header = document.querySelector<HTMLElement>('[data-header]');
 const nav = document.querySelector<HTMLElement>('[data-nav]');
