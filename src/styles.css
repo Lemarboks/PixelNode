@@ -3070,6 +3070,21 @@ html.low-power .hero-center-copy > * {
 
   .main-nav a {
     padding: 14px;
+    border-radius: 6px;
+  }
+
+  /* Current page: clear filled treatment in the vertical dropdown,
+     instead of the horizontal underline which floats oddly when stacked.
+     Scoped to .main-nav.open for specificity over the desktop rule. */
+  .main-nav.open a.active {
+    color: var(--text, #f7f7f7);
+    background: rgba(255, 255, 255, 0.08);
+    border-left: 3px solid var(--purple-bright);
+    padding-left: 11px;
+  }
+
+  .main-nav.open a.active::after {
+    display: none;
   }
 
   .header-cta {

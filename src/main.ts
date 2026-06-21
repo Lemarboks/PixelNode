@@ -90,12 +90,19 @@ const updateActiveLink = () => {
     return;
   }
 
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  // Normalise to a bare page name so clean Vercel URLs (/work) match
+  // the .html hrefs in the nav (work.html), and "" / "index" map to home.
+  const normalise = (p: string) => {
+    const name = p.split('#')[0].split('/').pop() || '';
+    const base = name.replace(/\.html$/, '');
+    return base === '' || base === 'index' ? 'home' : base;
+  };
+
+  const currentPage = normalise(window.location.pathname);
 
   navLinks.forEach((link) => {
-    const href = link.getAttribute('href') || '';
-    const linkPage = href.split('#')[0] || 'index.html';
-    link.classList.toggle('active', linkPage === currentPage || (currentPage === '' && linkPage === 'index.html'));
+    const linkPage = normalise(link.getAttribute('href') || '');
+    link.classList.toggle('active', linkPage === currentPage);
   });
 };
 
