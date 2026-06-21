@@ -2975,6 +2975,30 @@ html.low-power .hero-center-copy > * {
   border-top: 1px solid var(--line);
 }
 
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.16));
+  border-radius: 999px;
+  color: var(--muted, #b8b8b8);
+  transition: color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.footer-social a:hover {
+  color: var(--text, #f7f7f7);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
 .compact .brand-mark {
   width: 23px;
   height: 23px;
