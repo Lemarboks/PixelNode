@@ -280,15 +280,26 @@ textarea {
   transition: opacity 180ms ease, transform 180ms ease;
 }
 
-.main-nav a:hover,
-.main-nav a.active {
+.main-nav a:hover {
   color: var(--purple-bright);
 }
 
-.main-nav a:hover::after,
+.main-nav a:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Current page: always distinct from a passing hover state. */
+.main-nav a.active {
+  color: var(--purple-bright);
+  font-weight: 700;
+}
+
 .main-nav a.active::after {
   opacity: 1;
   transform: scaleX(1);
+  height: 3px;
+  background: var(--purple-bright);
 }
 
 .header-cta,
