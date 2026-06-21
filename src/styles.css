@@ -2548,6 +2548,29 @@ meter {
   transform: translateY(-2px);
 }
 
+.contact-trust {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.contact-trust li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 0.9rem;
+  color: var(--muted, #b8b8b8);
+}
+
+.contact-trust li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--text, #f7f7f7);
+  font-weight: 600;
+}
+
 .contact-form {
   display: grid;
   gap: 18px;

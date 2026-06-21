@@ -165,7 +165,7 @@ export function initQuoteCalculator() {
       <aside class="quote-summary">
         <p class="eyebrow">Your estimate <span></span></p>
         <div class="quote-total" data-total></div>
-        <p class="quote-disclaimer">An estimate to start the conversation — final quote confirmed after we discuss the details.</p>
+        <p class="quote-disclaimer">An estimate to start the conversation — final quote confirmed after we discuss the details. No obligation, and we reply within 24 hours.</p>
         <form class="quote-form" data-quote-form>
           <label>Name <input type="text" name="name" autocomplete="name" required /></label>
           <label>Email <input type="email" name="email" autocomplete="email" required /></label>
