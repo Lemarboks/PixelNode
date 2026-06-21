@@ -3722,6 +3722,21 @@ html.low-power .hero-center-copy > * {
 .quote-opt-label { grid-area: label; font-weight: 600; }
 .quote-opt-note { grid-area: note; font-size: 0.8rem; color: var(--dim, #858585); }
 .quote-opt-price { grid-area: price; color: var(--muted, #b8b8b8); font-size: 0.88rem; white-space: nowrap; }
+.quote-opt.popular { border-color: rgba(255,255,255,0.45); }
+.quote-opt-badge {
+  position: absolute;
+  top: -9px;
+  right: 14px;
+  padding: 2px 10px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #0a0a0a;
+  background: var(--text, #f7f7f7);
+  border-radius: 999px;
+  white-space: nowrap;
+}
 .quote-check { grid-template-areas: "label price"; }
 
 .quote-extra-pages {

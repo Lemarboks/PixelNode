@@ -18,6 +18,7 @@ interface CarePlan {
   label: string;
   price: number; // monthly
   note: string;
+  popular?: boolean;
 }
 
 const BASES: BaseOption[] = [
@@ -39,7 +40,7 @@ const ADDONS: AddOn[] = [
 const CARE_PLANS: CarePlan[] = [
   { id: 'none', label: 'No care plan', price: 0, note: '' },
   { id: 'lite', label: 'Care Lite', price: 350, note: 'hosting + backups + uptime' },
-  { id: 'plus', label: 'Care Plus', price: 750, note: '+ content updates + priority support' },
+  { id: 'plus', label: 'Care Plus', price: 750, note: '+ content updates + priority support', popular: true },
   { id: 'pro', label: 'Care Pro', price: 1500, note: '+ monthly improvements + photo credit' }
 ];
 
@@ -150,7 +151,8 @@ export function initQuoteCalculator() {
         <div class="quote-options" data-care>
           ${CARE_PLANS.map(
             (c) => `
-            <label class="quote-opt${c.id === state.care ? ' selected' : ''}">
+            <label class="quote-opt${c.id === state.care ? ' selected' : ''}${c.popular ? ' popular' : ''}">
+              ${c.popular ? '<span class="quote-opt-badge">Most popular</span>' : ''}
               <input type="radio" name="care" value="${c.id}"${c.id === state.care ? ' checked' : ''} />
               <span class="quote-opt-label">${c.label}</span>
               ${c.note ? `<span class="quote-opt-note">${c.note}</span>` : ''}
