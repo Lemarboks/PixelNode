@@ -47,26 +47,26 @@ const lowPowerDevice =
       isSamsungAndroid ||
       Boolean(navWithHints.deviceMemory && navWithHints.deviceMemory <= 4) ||
       navigator.hardwareConcurrency <= 4));
-const disableBackgroundVideo = prefersReducedMotion || Boolean(connection?.saveData);
 const canAnimate = !lowPowerDevice && !coarsePointer;
 
 document.documentElement.classList.toggle('low-power', lowPowerDevice);
-document.documentElement.classList.toggle('no-video', disableBackgroundVideo);
+backgroundVideos.forEach((video) => {
+  // Set properties before play for reliable autoplay in older browsers.
+  video.muted = true;
+  video.defaultMuted = true;
+  video.playsInline = true;
 
-if (disableBackgroundVideo) {
-  backgroundVideos.forEach((video) => {
-    video.pause();
-    video.removeAttribute('autoplay');
-    video.preload = 'none';
-    video.querySelectorAll('source').forEach((source) => {
-      source.dataset.src = source.getAttribute('src') || '';
-      source.removeAttribute('src');
+  const startPlayback = () => {
+    const playAttempt = video.play();
+    playAttempt?.catch(() => {
+      document.addEventListener('pointerdown', () => void video.play(), { once: true });
+      document.addEventListener('keydown', () => void video.play(), { once: true });
     });
-    video.removeAttribute('src');
-    video.load();
-  });
-}
+  };
 
+  video.addEventListener('canplay', startPlayback, { once: true });
+  startPlayback();
+});
 const setHeaderState = () => {
   header?.classList.toggle('scrolled', window.scrollY > 12);
 };

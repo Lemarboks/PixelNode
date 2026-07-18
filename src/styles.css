@@ -431,19 +431,12 @@ main > .section {
     radial-gradient(circle at 28% 44%, rgba(255, 255, 255, 0.24), transparent 26rem),
     linear-gradient(135deg, #030303, #101010);
 }
-
-.hero-background img,
 .hero-background video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.hero-background img {
-  opacity: 0.58;
-  filter: saturate(1.12) contrast(1.04);
 }
 
 .hero-background video {
@@ -2660,17 +2653,6 @@ html.low-power .cursor-glow,
 html.low-power .ambient-field {
   display: none;
 }
-
-html.no-video .hero-background video {
-  display: none;
-}
-
-html.no-video .hero-background img {
-  opacity: 1;
-}
-
-html.low-power .hero-background img,
-html.low-power .home-video-hero .hero-background img,
 html.low-power .services-visual-panel img,
 html.low-power .about-image-panel img,
 html.low-power .layout-preview img,
@@ -3306,8 +3288,6 @@ html.low-power .hero-center-copy > * {
 .home-video-hero .hero-background {
   border-radius: 0;
 }
-
-.home-video-hero .hero-background img,
 .home-video-hero .hero-background video {
   opacity: 1;
   filter: saturate(0.94) contrast(1.08) brightness(0.82);
@@ -3420,8 +3400,6 @@ html.low-power .hero-center-copy > * {
     min-height: 100dvh;
     padding: 104px 14px 28px;
   }
-
-  .home-video-hero .hero-background img,
   .home-video-hero .hero-background video {
     filter: none;
     object-position: center center;
@@ -3475,7 +3453,6 @@ html.low-power .hero-center-copy > * {
 }
 
 @media (max-width: 680px) and (orientation: portrait) {
-  .home-video-hero .hero-background img,
   .home-video-hero .hero-background video {
     width: 100%;
     height: 100%;
