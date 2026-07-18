@@ -77,15 +77,34 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   });
 
   if (insertErr) {
-    return res.status(500).json({ ok: false, error: 'Could not save your message. Please email us directly.' });
+    // Keep diagnostics useful without logging personal data or credentials.
+    console.error('Lead insert failed', {
+      code: insertErr.code,
+      message: insertErr.message,
+      details: insertErr.details,
+      hint: insertErr.hint
+    });
+
+    // Storage is preferred, but do not lose a genuine enquiry during a database
+    // outage or schema mismatch. Confirmed owner-email delivery is a success.
+    try {
+      const emailResult = await sendLeadEmails({ name, email, project, message: fullMessage });
+      if (emailResult.owner) {
+        return res.status(200).json({ ok: true, stored: false, delivered: true });
+      }
+    } catch (emailErr) {
+      console.error('Lead email fallback failed', emailErr instanceof Error ? emailErr.message : 'Unknown email error');
+    }
+
+    return res.status(500).json({ ok: false, error: 'Could not send your message. Please email us directly.' });
   }
 
   // 5. Email (best-effort; the lead is already safely stored).
   try {
     await sendLeadEmails({ name, email, project, message: fullMessage });
-  } catch {
-    // swallow — the lead is captured; email is a convenience, not a guarantee.
+  } catch (emailErr) {
+    console.error('Lead notification email failed', emailErr instanceof Error ? emailErr.message : 'Unknown email error');
   }
 
-  return res.status(200).json({ ok: true });
+  return res.status(200).json({ ok: true, stored: true });
 }
