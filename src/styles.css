@@ -2653,6 +2653,18 @@ html.low-power .cursor-glow,
 html.low-power .ambient-field {
   display: none;
 }
+html.low-power {
+  scroll-behavior: auto;
+}
+
+html.low-power .home-video-hero .hero-background video {
+  filter: none;
+}
+
+html.low-power .home-video-hero .hero-background::after {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.34) 45%, rgba(0, 0, 0, 0.78));
+}
+
 html.low-power .services-visual-panel img,
 html.low-power .about-image-panel img,
 html.low-power .layout-preview img,

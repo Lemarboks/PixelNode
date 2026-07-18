@@ -32,25 +32,34 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
 const backgroundVideos = Array.from(document.querySelectorAll<HTMLVideoElement>('.hero-background video'));
 const navWithHints = navigator as Navigator & {
-  connection?: { saveData?: boolean };
-  mozConnection?: { saveData?: boolean };
-  webkitConnection?: { saveData?: boolean };
+  connection?: { saveData?: boolean; effectiveType?: string };
+  mozConnection?: { saveData?: boolean; effectiveType?: string };
+  webkitConnection?: { saveData?: boolean; effectiveType?: string };
   deviceMemory?: number;
 };
 const connection = navWithHints.connection || navWithHints.mozConnection || navWithHints.webkitConnection;
 const isSamsungAndroid = /Samsung|SM-|SAMSUNG/i.test(navigator.userAgent);
+const limitedHardware =
+  Boolean(navWithHints.deviceMemory && navWithHints.deviceMemory <= 4) ||
+  Boolean(navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+const slowConnection = ['slow-2g', '2g', '3g'].includes(connection?.effectiveType || '');
 const lowPowerDevice =
   prefersReducedMotion ||
   Boolean(connection?.saveData) ||
-  (coarsePointer &&
-    (/Android/i.test(navigator.userAgent) ||
-      isSamsungAndroid ||
-      Boolean(navWithHints.deviceMemory && navWithHints.deviceMemory <= 4) ||
-      navigator.hardwareConcurrency <= 4));
+  limitedHardware ||
+  (coarsePointer && (/Android/i.test(navigator.userAgent) || isSamsungAndroid));
+const useLiteVideo = lowPowerDevice || slowConnection;
 const canAnimate = !lowPowerDevice && !coarsePointer;
 
 document.documentElement.classList.toggle('low-power', lowPowerDevice);
 backgroundVideos.forEach((video) => {
+  if (useLiteVideo) {
+    // Reuse the smaller mobile encode on constrained desktops and slow connections.
+    video.querySelectorAll('source').forEach((source) => source.remove());
+    video.src = './home-hero-video-mobile.mp4';
+    video.load();
+  }
+
   // Set properties before play for reliable autoplay in older browsers.
   video.muted = true;
   video.defaultMuted = true;
