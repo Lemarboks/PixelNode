@@ -4507,3 +4507,134 @@ html.low-power .connect-link:hover { transform: none; }
   font-feature-settings: "liga";
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
+
+
+/* Compact two-up mobile grids reduce scroll while preserving readable detail. */
+@media (max-width: 680px) {
+  .bento-page {
+    --bento-gap: 10px;
+    --bento-radius: 15px;
+  }
+
+  .bento-page main {
+    width: calc(100% - 16px);
+    gap: 10px;
+  }
+
+  .bento-services .service-strip,
+  .bento-work .layout-showcase,
+  .bento-work .media-stream,
+  .bento-work .work-stats-grid,
+  .bento-about .about-signal-stack,
+  .bento-about .about-value-stack,
+  .bento-founder .expertise-grid,
+  .bento-founder .achievement-grid,
+  .bento-founder .founder-project-grid,
+  .bento-founder .articles-grid,
+  .bento-founder .connect-grid,
+  .bento-blog .blog-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .bento-services .service-card,
+  .bento-services .service-card:first-child,
+  .bento-services .service-card:last-child,
+  .bento-work .layout-card,
+  .bento-work .layout-card:first-child {
+    grid-column: auto;
+  }
+
+  .bento-page :is(
+    .service-card,
+    .about-signal,
+    .about-value,
+    .work-stats-grid > div,
+    .expertise-card,
+    .achievement,
+    .founder-project,
+    .article-card,
+    .connect-link,
+    .blog-card
+  ) {
+    min-height: 0;
+    padding: 16px;
+    border-radius: 15px;
+  }
+
+  .bento-page :is(
+    .service-card h2,
+    .layout-card h3,
+    .frame-card strong,
+    .expertise-card h3,
+    .article-card h3,
+    .blog-card h2
+  ) {
+    font-size: 0.98rem;
+    line-height: 1.2;
+  }
+
+  .bento-page :is(
+    .service-card p,
+    .layout-card span,
+    .frame-card span,
+    .expertise-card p,
+    .achievement span,
+    .article-card p,
+    .blog-card p,
+    .connect-link > span:not(.connect-icon)
+  ) {
+    font-size: 0.78rem;
+    line-height: 1.42;
+  }
+
+  .bento-page .service-icon,
+  .bento-page .expertise-icon,
+  .bento-page .connect-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 12px;
+    border-radius: 11px;
+  }
+
+  .bento-page .service-icon { transform: scale(.82); transform-origin: left top; }
+  .bento-page .frame-meta,
+  .bento-page .layout-card > div:last-child { padding: 16px; }
+
+  .bento-work .layout-preview,
+  .bento-work .layout-card:first-child .layout-preview,
+  .bento-work .frame-visual {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  .bento-page :is(
+    .contact-section,
+    .quote-section,
+    .faq-section,
+    .process-grid,
+    .founder-story,
+    .founder-hero
+  ) {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 380px) {
+  .bento-page :is(
+    .service-card,
+    .about-signal,
+    .about-value,
+    .work-stats-grid > div,
+    .expertise-card,
+    .achievement,
+    .article-card,
+    .connect-link,
+    .blog-card
+  ) { padding: 13px; }
+
+  .bento-page :is(.service-card p, .expertise-card p, .blog-card p) {
+    font-size: 0.74rem;
+  }
+}
