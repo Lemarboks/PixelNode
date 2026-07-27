@@ -83,7 +83,10 @@
       <main>
         <section class="hero section home-video-hero" aria-label="PixelNode home">
           <div class="hero-background" aria-hidden="true">
-            <img src="./assets/images/services-showcase.webp" alt="" width="1600" height="1067" fetchpriority="high" />
+            <video autoplay muted loop playsinline preload="auto" disablepictureinpicture>
+              <source src="./home-hero-video-mobile.mp4" type="video/mp4" media="(max-width: 680px)" />
+              <source src="./home-hero-video.mp4" type="video/mp4" />
+            </video>
           </div>
           <div class="hero-copy hero-center-copy">
             <p class="eyebrow">PixelNode Studio <span></span></p>
