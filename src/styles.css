@@ -4638,3 +4638,45 @@ html.low-power .connect-link:hover { transform: none; }
     font-size: 0.74rem;
   }
 }
+
+
+/* Smooth cross-document navigation without adding motion to individual cards. */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: pageTransitionOut 160ms ease-in both;
+}
+
+::view-transition-new(root) {
+  animation: pageTransitionIn 240ms ease-out both;
+}
+
+html.page-transition-fallback body {
+  animation: pageTransitionIn 220ms ease-out both;
+}
+
+html.page-transition-fallback body.page-leaving {
+  pointer-events: none;
+  animation: pageTransitionOut 150ms ease-in both;
+}
+
+@keyframes pageTransitionIn {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pageTransitionOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-5px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  html.page-transition-fallback body,
+  html.page-transition-fallback body.page-leaving {
+    animation: none !important;
+  }
+}

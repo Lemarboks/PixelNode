@@ -308,3 +308,37 @@ deploySim?.addEventListener('click', () => {
   if (labReadout) labReadout.textContent = 'deploying website... build passed -> route live';
   writeTerminalLine('deploy simulation complete -> pxn-demo promoted to live');
 });
+
+
+// Cross-page transitions: native View Transitions where available, small fallback elsewhere.
+const supportsPageTransitions = 'startViewTransition' in document;
+if (!supportsPageTransitions && !prefersReducedMotion) {
+  document.documentElement.classList.add('page-transition-fallback');
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) return;
+
+    const link = (event.target as Element).closest<HTMLAnchorElement>('a[href]');
+    if (!link || link.target || link.hasAttribute('download')) return;
+
+    const destination = new URL(link.href, window.location.href);
+    if (
+      destination.origin !== window.location.origin ||
+      destination.protocol !== window.location.protocol ||
+      destination.pathname === window.location.pathname && destination.search === window.location.search
+    ) return;
+
+    event.preventDefault();
+    document.body.classList.add('page-leaving');
+    window.setTimeout(() => {
+      window.location.href = destination.href;
+    }, 150);
+  });
+}
