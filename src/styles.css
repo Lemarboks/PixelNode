@@ -4490,3 +4490,20 @@ html.low-power .connect-link:hover { transform: none; }
     height: auto;
   }
 }
+
+/* Official Google Material Symbols replace decorative emoji glyphs. */
+.expertise-icon .material-symbols-outlined {
+  display: block;
+  font-family: "Material Symbols Outlined";
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: "liga";
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
