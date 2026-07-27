@@ -4799,3 +4799,146 @@ html.page-transition-fallback body.page-leaving {
 @media (max-width: 680px) {
   .bento-work .layout-card h3 { min-height: 2.4em; }
 }
+
+/* Impeccable full non-home polish: consistent rhythm, readable hierarchy, quiet motion. */
+.bento-page:not(.bento-admin) main {
+  gap: clamp(16px, 2vw, 24px);
+}
+
+.bento-page:not(.bento-admin) .page-hero {
+  min-height: 0;
+  padding: clamp(34px, 5vw, 68px);
+}
+
+.bento-page:not(.bento-admin) .page-hero > p:last-child {
+  max-width: 68ch;
+}
+
+.bento-page:not(.bento-admin) :is(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid var(--purple-bright);
+  outline-offset: 3px;
+}
+
+.bento-page:not(.bento-admin) :is(.button, .header-cta, .project-link, .connect-link) {
+  min-height: 44px;
+}
+
+/* Services: four equally weighted choices with one clear visual anchor. */
+.bento-services .services-visual-section { grid-column: span 6; }
+.bento-services .service-strip {
+  grid-column: span 6;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+}
+.bento-services .service-card,
+.bento-services .service-card:first-child,
+.bento-services .service-card:last-child {
+  grid-column: auto;
+  min-height: 220px;
+  border-radius: 16px;
+}
+.bento-services .service-card { display: flex; flex-direction: column; }
+.bento-services .service-card p { margin-top: auto; }
+.bento-services .quote-section,
+.bento-services .faq-section { border-radius: 16px; }
+.bento-services .faq-item summary { min-height: 48px; display: flex; align-items: center; }
+
+/* About: an explicit editorial grid instead of floating HUD fragments. */
+.bento-about .about-video-stage { align-items: stretch; }
+.bento-about .about-hud-primary,
+.bento-about .about-hud-secondary,
+.bento-about .about-image-panel,
+.bento-about .about-signal,
+.bento-about .about-value { border-radius: 16px; }
+.bento-about .about-image-panel img { width: 100%; height: 100%; object-fit: cover; }
+.bento-about .about-signal-stack,
+.bento-about .about-value-stack { align-items: stretch; }
+.bento-about .about-signal,
+.bento-about .about-value { display: flex; flex-direction: column; justify-content: space-between; }
+.bento-about .status-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.bento-about .status-card { min-width: 0; border-radius: 16px; }
+
+/* Founder: even card families and quieter, useful interaction. */
+.bento-founder :is(.expertise-grid, .articles-grid) { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
+.bento-founder :is(.achievement-grid, .founder-project-grid) { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
+.bento-founder .connect-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.bento-founder :is(.expertise-card, .achievement, .founder-project, .article-card, .connect-link) {
+  height: 100%;
+  border-radius: 16px;
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+.bento-founder :is(.expertise-card, .article-card):hover { transform: none; }
+
+/* Contact: shorter scanning path and dependable form controls. */
+.bento-contact .contact-section { align-items: stretch; }
+.bento-contact .contact-copy,
+.bento-contact .contact-form { border-radius: 16px; }
+.bento-contact .contact-form { display: grid; align-content: start; gap: 16px; }
+.bento-contact .contact-form label { margin: 0; }
+.bento-contact .contact-form :is(input, select, textarea) { min-height: 48px; border-radius: 12px; }
+.bento-contact .contact-form textarea { min-height: 132px; }
+.bento-contact .contact-trust { display: grid; gap: 10px; }
+
+/* Blog index and articles: editorial measure, equal cards, clear hit areas. */
+.bento-blog .blog-list { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
+.bento-blog .blog-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+  padding: clamp(22px, 3vw, 32px);
+  border-radius: 16px;
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+.bento-blog .blog-card:hover { transform: none; }
+.bento-blog .blog-by { margin-top: auto; padding-top: 20px; }
+.bento-article .article { width: min(100%, 760px); padding: clamp(24px, 5vw, 56px); border-radius: 16px; }
+.bento-article .article :is(p, li) { max-width: 70ch; line-height: 1.72; }
+.bento-article .article h1 { text-wrap: balance; }
+.bento-article .article-cta { border-radius: 16px; }
+
+@media (max-width: 980px) {
+  .bento-services .services-visual-section,
+  .bento-services .service-strip { grid-column: 1; }
+  .bento-about .status-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bento-founder .connect-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 680px) {
+  .bento-page:not(.bento-admin) .page-hero { padding: 26px 22px; }
+  .bento-services .service-strip,
+  .bento-founder :is(.expertise-grid, .achievement-grid, .founder-project-grid, .articles-grid, .connect-grid),
+  .bento-blog .blog-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bento-services .service-card { min-height: 210px; padding: 16px; }
+  .bento-services .service-card p { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 4; }
+  .bento-about .about-hud-primary,
+  .bento-about .about-image-panel,
+  .bento-about .about-hud-secondary { grid-column: 1 / -1; }
+  .bento-about .about-signal-stack { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .bento-about .about-value-stack { grid-template-columns: 1fr; }
+  .bento-about .about-signal { padding: 14px 10px; text-align: center; }
+  .bento-about .about-signal strong { font-size: 1rem; }
+  .bento-about .about-signal span { font-size: .72rem; }
+  .bento-about .status-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bento-founder :is(.expertise-card, .achievement, .founder-project, .article-card, .connect-link),
+  .bento-blog .blog-card { min-width: 0; min-height: 0; padding: 16px; }
+  .bento-blog .blog-card p { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 4; }
+  .bento-blog .blog-by { font-size: .7rem; }
+  .bento-contact .contact-copy,
+  .bento-contact .contact-form { padding: 22px; }
+  .bento-article .article { padding: 24px 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bento-page:not(.bento-admin) *,
+  .bento-page:not(.bento-admin) *::before,
+  .bento-page:not(.bento-admin) *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+/* Reliable keyboard and touch hit areas in shared navigation. */
+.bento-page:not(.bento-admin) :is(.main-nav a, .footer-social a, .article-back a, .contact-emails a) {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+}
+@media (max-width: 680px) {
+  .bento-page:not(.bento-admin) .main-nav a { width: 100%; }
+}

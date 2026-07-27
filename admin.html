@@ -84,6 +84,11 @@
       .save-note { font-size: 0.85rem; padding: 6px 12px; }
       .empty, .loading { color: var(--muted); text-align: center; padding: 40px; }
       .saved-flash { color: #86efac; font-size: 0.8rem; margin-left: 8px; }
+      .lead-tools { display: grid; grid-template-columns: 1fr 180px; gap: 12px; margin-bottom: 18px; }
+      .lead-tools label { display: grid; gap: 7px; color: var(--muted); font-size: .8rem; }
+      .lead-tools input, .lead-tools select { width: 100%; min-height: 44px; }
+      :is(.btn, input, select, textarea):focus-visible { outline: 3px solid #a78bfa; outline-offset: 2px; }
+      @media (max-width: 620px) { .wrap { padding: 18px 12px 60px; } .topbar { align-items: flex-start; gap: 14px; } .lead-tools { grid-template-columns: 1fr; } .stats { display: grid; grid-template-columns: repeat(2, 1fr); } .stat { min-width: 0; } .btn { min-height: 44px; } }
     </style>
   </head>
   <body class="bento-page bento-admin">
@@ -108,6 +113,10 @@
         </div>
       </div>
       <div class="stats" data-stats></div>
+      <div class="lead-tools" aria-label="Lead filters">
+        <label><span>Search leads</span><input type="search" data-lead-search placeholder="Name, email, project or message" /></label>
+        <label><span>Status</span><select data-lead-filter><option value="all">All statuses</option><option value="new">New</option><option value="contacted">Contacted</option><option value="won">Won</option><option value="lost">Lost</option></select></label>
+      </div>
       <div data-leads><p class="loading">Loading leads…</p></div>
     </div>
 

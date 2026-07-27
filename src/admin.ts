@@ -19,6 +19,9 @@ const leadsEl = document.querySelector<HTMLElement>('[data-leads]')!;
 const statsEl = document.querySelector<HTMLElement>('[data-stats]')!;
 const refreshBtn = document.querySelector<HTMLButtonElement>('[data-refresh]')!;
 const logoutBtn = document.querySelector<HTMLButtonElement>('[data-logout]')!;
+const searchInput = document.querySelector<HTMLInputElement>('[data-lead-search]')!;
+const statusFilter = document.querySelector<HTMLSelectElement>('[data-lead-filter]')!;
+let allLeads: Lead[] = [];
 
 const esc = (s: string) =>
   s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
@@ -105,6 +108,16 @@ function renderLeads(leads: Lead[]) {
   });
 }
 
+function applyFilters() {
+  const query = searchInput.value.trim().toLowerCase();
+  const status = statusFilter.value;
+  const filtered = allLeads.filter((lead) => {
+    const matchesStatus = status === 'all' || lead.status === status;
+    const haystack = `${lead.name} ${lead.email} ${lead.project} ${lead.message}`.toLowerCase();
+    return matchesStatus && (!query || haystack.includes(query));
+  });
+  renderLeads(filtered);
+}
 async function loadLeads() {
   leadsEl.innerHTML = '<p class="loading">Loading leads…</p>';
   const res = await fetch('/api/admin/leads');
@@ -118,8 +131,9 @@ async function loadLeads() {
     return;
   }
   showDash();
-  renderStats(data.leads ?? []);
-  renderLeads(data.leads ?? []);
+  allLeads = data.leads ?? [];
+  renderStats(allLeads);
+  applyFilters();
 }
 
 async function updateLead(id: string, status: Lead['status'], notes: string): Promise<boolean> {
@@ -149,6 +163,8 @@ loginForm.addEventListener('submit', async (e) => {
   }
 });
 
+searchInput.addEventListener('input', applyFilters);
+statusFilter.addEventListener('change', applyFilters);
 refreshBtn.addEventListener('click', loadLeads);
 
 logoutBtn.addEventListener('click', async () => {
