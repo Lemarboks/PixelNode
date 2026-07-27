@@ -4696,3 +4696,106 @@ html.page-transition-fallback body.page-leaving {
     width: 100%;
   }
 }
+
+/* Impeccable Work polish: controlled proof, even geometry, restrained motion. */
+.bento-work .layout-showcase {
+  align-items: stretch;
+}
+
+.bento-work .layout-card,
+.bento-work .layout-card:first-child {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+  border-radius: 16px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .25);
+}
+
+.bento-work .layout-card:first-child .layout-preview,
+.bento-work .layout-preview {
+  min-height: 0;
+  aspect-ratio: 16 / 10;
+}
+
+.bento-work .project-cover {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transform: none;
+  transition: filter 180ms ease;
+}
+
+.bento-work .layout-card:hover .project-cover {
+  filter: brightness(.92) saturate(1.04);
+}
+
+.bento-work .preview-open,
+.bento-work .project-link {
+  min-height: 44px;
+  padding-inline: 16px;
+  align-items: center;
+}
+
+.bento-work .preview-open {
+  right: 16px;
+  bottom: 16px;
+  font-size: .78rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .28);
+}
+
+.bento-work .case-studies {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--bento-gap, 18px);
+}
+
+.bento-work .case-studies > .section-heading {
+  grid-column: 1 / -1;
+}
+
+.bento-work .case-study {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: clamp(22px, 2.5vw, 32px);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(20, 21, 33, .94), rgba(10, 11, 18, .9));
+  box-shadow: 0 16px 38px rgba(0, 0, 0, .2);
+}
+
+.bento-work .case-grid {
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.bento-work .case-block {
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, .11);
+}
+
+.bento-work .case-study .project-link {
+  display: inline-flex;
+  margin-top: auto;
+}
+
+.bento-work :is(.preview-open, .project-link):focus-visible {
+  outline: 3px solid var(--purple-bright);
+  outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .bento-work .case-studies { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 680px) {
+  .bento-work .layout-showcase { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bento-work .layout-card > div:last-child { padding: 14px; }
+  .bento-work .layout-card span { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+  .bento-work .preview-open { right: 8px; bottom: 8px; min-height: 44px; padding-inline: 12px; }
+}
+@media (max-width: 680px) {
+  .bento-work .layout-card h3 { min-height: 2.4em; }
+}
