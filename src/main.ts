@@ -184,6 +184,15 @@ if (canAnimate) {
   revealItems.forEach((item) => item.classList.add('visible'));
 }
 
+const fetchWithTimeout = async (input: RequestInfo | URL, init: RequestInit, timeoutMs = 15000) => {
+  const controller = new AbortController();
+  const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(input, { ...init, signal: controller.signal });
+  } finally {
+    window.clearTimeout(timer);
+  }
+};
 const CONTACT_EMAIL = 'pixelnode.studios@gmail.com';
 
 const setFormStatus = (text: string, state: 'idle' | 'sending' | 'success' | 'error') => {
@@ -222,7 +231,7 @@ contactForm?.addEventListener('submit', async (event) => {
   setFormStatus('Sending your project details…', 'sending');
 
   try {
-    const response = await fetch('/api/contact', {
+    const response = await fetchWithTimeout('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(fields)

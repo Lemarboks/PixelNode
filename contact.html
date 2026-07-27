@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description" content="Contact PixelNode for web design, hosting, homelab, and photography projects." />
     <title>Contact | PixelNode</title>
     <link rel="canonical" href="https://pixelnodestudio.co.za/contact" />
@@ -29,7 +29,6 @@
   </head>
   <body class="bento-page bento-contact">
     <div class="cursor-glow" aria-hidden="true" data-cursor-glow></div>
-    <div class="ambient-field" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="site-shell">
       <header class="site-header" data-header>
         <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span class="brand-text">PixelNode</span></a>
@@ -41,10 +40,10 @@
         <section class="section contact-section page-contact">
           <div class="contact-copy"><p class="eyebrow">Hire PixelNode <span></span></p><h1>Tell us what you want to build.</h1><p>Send the essentials and we will respond with a clear next step: website plan, hosting setup, homelab support, photography session, or discovery call.</p><div class="contact-points"><span>web design</span><span>hosting</span><span>homelabs</span><span>photography</span></div><div class="contact-emails" aria-label="PixelNode email addresses"><a href="mailto:pixelnode.studios@gmail.com">pixelnode.studios@gmail.com</a></div><ul class="contact-trust" aria-label="What to expect"><li>Reply within 24 hours</li><li>No-obligation quote</li><li>Cape Town based, working SA-wide</li></ul></div>
           <form class="contact-form" data-contact-form>
-            <label>Name <input type="text" name="name" autocomplete="name" required /></label>
-            <label>Email <input type="email" name="email" autocomplete="email" required /></label>
+            <label>Name <input type="text" name="name" autocomplete="name" maxlength="120" required /></label>
+            <label>Email <input type="email" name="email" autocomplete="email" maxlength="200" required /></label>
             <label>Project Type <select name="project" required><option value="">Choose one</option><option>New website</option><option>Website redesign</option><option>Hosting and domain setup</option><option>Homelab / server setup</option><option>Photography / media</option><option>Maintenance plan</option></select></label>
-            <label>Project Details <textarea name="message" rows="5" placeholder="What do you need built, fixed, hosted, or captured?" required></textarea></label>
+            <label>Project Details <textarea name="message" rows="5" maxlength="5000" placeholder="What do you need built, fixed, hosted, or captured?" required></textarea></label>
             <div class="hp-field" aria-hidden="true"><label>Company <input type="text" name="company" tabindex="-1" autocomplete="off" /></label></div>
             <button class="button button-primary" type="submit">Start Project <span aria-hidden="true">-&gt;</span></button>
             <p class="form-status" role="status" data-form-status></p>

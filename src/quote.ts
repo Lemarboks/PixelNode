@@ -1,3 +1,12 @@
+const fetchQuoteWithTimeout = async (input: RequestInfo | URL, init: RequestInit, timeoutMs = 15000) => {
+  const controller = new AbortController();
+  const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(input, { ...init, signal: controller.signal });
+  } finally {
+    window.clearTimeout(timer);
+  }
+};
 // Interactive quote calculator for the Services page.
 // Single source of truth for pricing — edit numbers here.
 
@@ -167,8 +176,8 @@ export function initQuoteCalculator() {
         <div class="quote-total" data-total></div>
         <p class="quote-disclaimer">An estimate to start the conversation — final quote confirmed after we discuss the details. No obligation, and we reply within 24 hours.</p>
         <form class="quote-form" data-quote-form>
-          <label>Name <input type="text" name="name" autocomplete="name" required /></label>
-          <label>Email <input type="email" name="email" autocomplete="email" required /></label>
+          <label>Name <input type="text" name="name" autocomplete="name" maxlength="120" required /></label>
+          <label>Email <input type="email" name="email" autocomplete="email" maxlength="200" required /></label>
           <div class="hp-field" aria-hidden="true"><label>Company <input type="text" name="company" tabindex="-1" autocomplete="off" /></label></div>
           <button class="button button-primary" type="submit">Get my detailed quote <span aria-hidden="true">-&gt;</span></button>
           <p class="form-status" role="status" data-quote-status></p>
@@ -255,7 +264,7 @@ export function initQuoteCalculator() {
     setStatus('Sending your estimate…', 'sending');
 
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetchQuoteWithTimeout('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
