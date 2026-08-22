@@ -4870,6 +4870,15 @@ html.page-transition-fallback body.page-leaving {
 .bento-founder :is(.expertise-grid, .articles-grid) { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
 .bento-founder :is(.achievement-grid, .founder-project-grid) { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
 .bento-founder .connect-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.bento-founder .founder-expertise .layout-showcase { grid-template-columns: minmax(0, 1fr); }
+.bento-founder .founder-expertise .layout-preview {
+  min-height: 0;
+  aspect-ratio: 16 / 10;
+}
+.bento-founder .founder-expertise .project-cover {
+  object-fit: contain;
+  object-position: top center;
+}
 .bento-founder :is(.expertise-card, .achievement, .founder-project, .article-card, .connect-link) {
   height: 100%;
   border-radius: 16px;
