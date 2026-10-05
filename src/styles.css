@@ -5129,3 +5129,47 @@ p, li { text-wrap: pretty; }
   object-position: center;
   filter: saturate(.82) contrast(1.06) brightness(.72);
 }
+
+/* ==================================================================
+   Insights grid (founder page) — three cards
+   ==================================================================
+   Three cards only lay out evenly as 3-up or as a single column. Every
+   breakpoint below desktop previously dropped to 2 columns, which always
+   orphaned the third card, and the unconditional .bento-founder rule
+   outranked the generic 1-column phone rule so phones never stacked.
+   These come last in the file so they win on source order at equal
+   specificity. */
+.bento-founder .articles-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .bento-founder .articles-grid { grid-template-columns: 1fr; }
+}
+
+/* Even internal rhythm so differing title lengths stop reading as lopsided:
+   tag hugs its text, title sits at the top, byline pins to the bottom. */
+.bento-founder .article-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.bento-founder .article-card .article-tag { align-self: flex-start; }
+
+.bento-founder .article-card .article-by { margin-top: auto; padding-top: 14px; }
+
+/* ==================================================================
+   Blog article pages — restore full-width article column
+   ==================================================================
+   These pages place an <article> (and its CTA) directly inside <main>,
+   but the span rule above only matches `main > section`. Unmatched, they
+   became items in a single 1/12 column of the 12-column bento grid —
+   narrower than their own padding, which wrapped body text one character
+   per line. Span every direct child on article pages instead; .article
+   keeps its own max-width: 760px and auto margins for measure. */
+.bento-article main > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
