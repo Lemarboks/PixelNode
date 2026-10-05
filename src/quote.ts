@@ -15,12 +15,18 @@ interface BaseOption {
   label: string;
   price: number;
   note: string;
+  // Scoped individually rather than priced here (e.g. custom software builds).
+  // The calculator shows "quoted on scope" instead of a rand estimate.
+  custom?: boolean;
 }
 interface AddOn {
   id: string;
   label: string;
   price: number;
   percent?: boolean; // price is a % of the running once-off total (e.g. rush)
+  // Priced per engagement rather than here (e.g. marketing retainers), so it
+  // is listed on the request but left out of the estimate arithmetic.
+  quoted?: boolean;
 }
 interface CarePlan {
   id: string;
@@ -34,7 +40,8 @@ const BASES: BaseOption[] = [
   { id: 'landing', label: 'Landing page', price: 2500, note: 'single-page site' },
   { id: 'business', label: 'Business website', price: 6500, note: 'up to 5 pages' },
   { id: 'ecommerce', label: 'Ecommerce / advanced', price: 12000, note: 'store, bookings, etc.' },
-  { id: 'redesign', label: 'Website redesign', price: 4500, note: 'refresh an existing site' }
+  { id: 'redesign', label: 'Website redesign', price: 4500, note: 'refresh an existing site' },
+  { id: 'software', label: 'Custom software', price: 0, note: 'apps, tools, automation — any platform', custom: true }
 ];
 
 const ADDONS: AddOn[] = [
@@ -43,6 +50,7 @@ const ADDONS: AddOn[] = [
   { id: 'photography', label: 'Photography / media', price: 850 },
   { id: 'homelab', label: 'Homelab / server setup', price: 3500 },
   { id: 'logo', label: 'Logo / brand basics', price: 1800 },
+  { id: 'marketing', label: 'Digital marketing / SEO', price: 0, quoted: true },
   { id: 'rush', label: 'Rush delivery (1 week)', price: 25, percent: true }
 ];
 
@@ -64,11 +72,13 @@ interface QuoteState {
 
 function computeTotals(state: QuoteState) {
   const base = BASES.find((b) => b.id === state.base);
+  // Custom software is scoped per project, so no once-off figure is shown.
+  const custom = Boolean(base?.custom);
   let onceOff = base ? base.price : 0;
 
   // Flat add-ons first.
   for (const addon of ADDONS) {
-    if (addon.percent) continue;
+    if (addon.percent || addon.quoted) continue;
     if (addon.id === 'extra-page') {
       onceOff += addon.price * state.extraPages;
     } else if (state.addons.has(addon.id)) {
@@ -77,6 +87,7 @@ function computeTotals(state: QuoteState) {
   }
   // Percentage add-ons (e.g. rush) apply to the running once-off total.
   for (const addon of ADDONS) {
+    if (addon.quoted) continue;
     if (addon.percent && state.addons.has(addon.id)) {
       onceOff += Math.round((onceOff * addon.price) / 100);
     }
@@ -85,7 +96,11 @@ function computeTotals(state: QuoteState) {
   const carePlan = CARE_PLANS.find((c) => c.id === state.care);
   const monthly = carePlan ? carePlan.price : 0;
 
-  return { onceOff, monthly };
+  // Selected extras that carry no figure here — surfaced so the visitor can
+  // see they were included in the request, not silently dropped.
+  const quotedExtras = ADDONS.filter((a) => a.quoted && state.addons.has(a.id)).map((a) => a.label);
+
+  return { onceOff, monthly, custom, quotedExtras };
 }
 
 function buildSummary(state: QuoteState): string {
@@ -95,12 +110,18 @@ function buildSummary(state: QuoteState): string {
   if (state.extraPages > 0) lines.push(`Extra pages: ${state.extraPages}`);
   for (const addon of ADDONS) {
     if (addon.id === 'extra-page') continue;
-    if (state.addons.has(addon.id)) lines.push(`Add-on: ${addon.label}`);
+    if (state.addons.has(addon.id)) {
+      lines.push(`Add-on: ${addon.label}${addon.quoted ? ' (quoted separately)' : ''}`);
+    }
   }
   const care = CARE_PLANS.find((c) => c.id === state.care);
   if (care && care.id !== 'none') lines.push(`Care plan: ${care.label} (${zar(care.price)}/mo)`);
-  const { onceOff, monthly } = computeTotals(state);
-  lines.push(`Estimated once-off: ${zar(onceOff)}`);
+  const { onceOff, monthly, custom } = computeTotals(state);
+  if (custom) {
+    lines.push('Estimated once-off: quoted on scope (custom software build)');
+  } else {
+    lines.push(`Estimated once-off: ${zar(onceOff)}`);
+  }
   if (monthly > 0) lines.push(`Estimated monthly: ${zar(monthly)}/mo`);
   return lines.join('\n');
 }
@@ -128,7 +149,7 @@ export function initQuoteCalculator() {
               <input type="radio" name="base" value="${b.id}"${b.id === state.base ? ' checked' : ''} />
               <span class="quote-opt-label">${b.label}</span>
               <span class="quote-opt-note">${b.note}</span>
-              <span class="quote-opt-price">from ${zar(b.price)}</span>
+              <span class="quote-opt-price">${b.custom ? 'quoted on scope' : `from ${zar(b.price)}`}</span>
             </label>`
           ).join('')}
         </div>
@@ -150,7 +171,7 @@ export function initQuoteCalculator() {
             <label class="quote-opt quote-check">
               <input type="checkbox" value="${a.id}" />
               <span class="quote-opt-label">${a.label}</span>
-              <span class="quote-opt-price">${a.percent ? `+${a.price}%` : `+${zar(a.price)}`}</span>
+              <span class="quote-opt-price">${a.percent ? `+${a.price}%` : a.quoted ? 'quoted separately' : `+${zar(a.price)}`}</span>
             </label>`
             )
             .join('')}
@@ -178,6 +199,7 @@ export function initQuoteCalculator() {
         <form class="quote-form" data-quote-form>
           <label>Name <input type="text" name="name" autocomplete="name" maxlength="120" required /></label>
           <label>Email <input type="email" name="email" autocomplete="email" maxlength="200" required /></label>
+          <label class="quote-brief" data-quote-brief hidden>What should the software do? <textarea name="brief" rows="3" maxlength="2000" placeholder="e.g. a booking system for my salon, an internal stock dashboard, an app for my delivery drivers"></textarea></label>
           <div class="hp-field" aria-hidden="true"><label>Company <input type="text" name="company" tabindex="-1" autocomplete="off" /></label></div>
           <button class="button button-primary" type="submit">Get my detailed quote <span aria-hidden="true">-&gt;</span></button>
           <p class="form-status" role="status" data-quote-status></p>
@@ -187,12 +209,28 @@ export function initQuoteCalculator() {
 
   const totalEl = root.querySelector<HTMLElement>('[data-total]')!;
   const pagesCount = root.querySelector<HTMLElement>('[data-pages-count]')!;
+  const briefField = root.querySelector<HTMLElement>('[data-quote-brief]')!;
+  const briefInput = briefField.querySelector<HTMLTextAreaElement>('textarea')!;
+
+  // The brief only applies to custom software. A hidden `required` control
+  // would block submission outright, so required tracks visibility.
+  const syncBriefField = () => {
+    const { custom } = computeTotals(state);
+    briefField.hidden = !custom;
+    briefInput.required = custom;
+  };
 
   const renderTotal = () => {
-    const { onceOff, monthly } = computeTotals(state);
+    const { onceOff, monthly, custom, quotedExtras } = computeTotals(state);
+    const once = custom
+      ? `<strong class="quoted">Quoted on scope</strong><span>software builds are priced per project</span>`
+      : `<strong>${zar(onceOff)}</strong><span>once-off</span>`;
     totalEl.innerHTML =
-      `<strong>${zar(onceOff)}</strong><span>once-off</span>` +
-      (monthly > 0 ? `<strong class="monthly">+ ${zar(monthly)}</strong><span>per month</span>` : '');
+      once +
+      (monthly > 0 ? `<strong class="monthly">+ ${zar(monthly)}</strong><span>per month</span>` : '') +
+      (quotedExtras.length > 0
+        ? `<span class="quote-extra-note">+ ${quotedExtras.join(', ')} — quoted separately</span>`
+        : '');
   };
 
   // Base radios.
@@ -202,6 +240,7 @@ export function initQuoteCalculator() {
       root.querySelectorAll('[data-bases] .quote-opt').forEach((o) => o.classList.remove('selected'));
       input.closest('.quote-opt')?.classList.add('selected');
       renderTotal();
+      syncBriefField();
     });
   });
 
@@ -250,11 +289,14 @@ export function initQuoteCalculator() {
     }
     const data = new FormData(form);
     const base = BASES.find((b) => b.id === state.base);
+    const brief = String(data.get('brief') ?? '').trim();
     const payload = {
       name: String(data.get('name') ?? '').trim(),
       email: String(data.get('email') ?? '').trim(),
       project: base ? `Quote: ${base.label}` : 'Quote request',
-      message: 'Quote request submitted from the website calculator.',
+      message: brief
+        ? `Software request: ${brief}`
+        : 'Quote request submitted from the website calculator.',
       quoteSummary: buildSummary(state),
       company: String(data.get('company') ?? '')
     };
