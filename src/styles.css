@@ -5133,18 +5133,23 @@ p, li { text-wrap: pretty; }
 /* ==================================================================
    Insights grid (founder page) — three cards
    ==================================================================
-   Three cards only lay out evenly as 3-up or as a single column. Every
-   breakpoint below desktop previously dropped to 2 columns, which always
-   orphaned the third card, and the unconditional .bento-founder rule
-   outranked the generic 1-column phone rule so phones never stacked.
-   These come last in the file so they win on source order at equal
-   specificity. */
+   Four cards: 4-up on desktop (matching the connect row on the same page),
+   an even 2x2 on tablets, stacked on phones - every step divides four
+   exactly, so no card is ever orphaned on its own row. The earlier
+   breakpoints dropped to 2 columns regardless of count, and the
+   unconditional .bento-founder rule outranked the generic 1-column phone
+   rule so phones never stacked. These come last in the file so they win
+   on source order at equal specificity. */
 .bento-founder .articles-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: stretch;
 }
 
 @media (max-width: 900px) {
+  .bento-founder .articles-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
   .bento-founder .articles-grid { grid-template-columns: 1fr; }
 }
 
